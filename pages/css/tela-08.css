@@ -1,0 +1,121 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-de-fundo: #2d308e;
+    --central-color: #f0f0f0;
+    --central-senha: #fafafa;
+    --forum-color: #2226a8;
+    --text-color: #d9d9d9;
+    --text-p-h2: #FFFFFF;
+    --text-h1: #000000;
+    --paragrafo: #004aad;
+}
+
+
+
+
+.coteiner-header {
+    display: flex;
+    gap: 150px;
+    background-color: var(--color-de-fundo);
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+header h1 {
+    text-align: end;
+    font-size: 19px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-p-h2);
+}
+
+.data-hora {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    color: var(--central-color);
+}
+
+.sacao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.tabela {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.fila-chamada table {
+
+    border-collapse: collapse;
+    align-items: center;
+    text-align: center;
+    box-shadow: 2px 2px 10px;
+    table-layout: fixed;
+}
+
+.fila-chamada th,
+.fila-chamada td {
+    width: 200px;
+    height: 50px;
+    padding: 10px;
+    border: 3px solid var(--forum-color);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.fila-chamada th {
+    background-color: var(--forum-color);
+    color: white;
+    font-weight: bold;
+}
+
+.fila-chamada tr {
+    border: 3px solid var(--color-buton);
+}
+
+/* largura específica por coluna: */
+.fila-chamada th:nth-child(1),
+.fila-chamada td:nth-child(1) {
+    width: 300px;
+    /* Nome */
+}
+
+.fila-chamada th:nth-child(2),
+.fila-chamada td:nth-child(2) {
+    width: 200px;
+    /* Composição */
+}
+
+.fila-chamada th:nth-child(3),
+.fila-chamada td:nth-child(3) {
+    width: 180px;
+    /* CPF */
+}
+
+
+.img-fo {
+
+    left: 30px;
+    height: 80px;
+
+
+}
