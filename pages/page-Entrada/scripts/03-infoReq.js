@@ -111,7 +111,12 @@ export function infoReq() {
         
         // Redireciona para próxima página
         setTimeout(() => {
-            window.location.href = './04-resumo.html';
+            console.log("Dados no localStorage");
+            console.log(localStorage.getItem('cpf'));
+            console.log(localStorage.getItem('servico'));
+            console.log(localStorage.getItem('horario'));
+            console.log(localStorage.getItem('req'));
+            window.location.href = '../html/04-impressao.html';
         }, 1500);
     });
 

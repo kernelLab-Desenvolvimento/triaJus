@@ -1,6 +1,6 @@
 // ../page-Entrada/scripts/01-auth.js
 /*imports*/
-import { verifyCPF } from "../../src/cpfVerify";
+import { verifyCPF } from "../../src/cpfVerify.js";
 
 export function auth() {
     // Elementos DOM

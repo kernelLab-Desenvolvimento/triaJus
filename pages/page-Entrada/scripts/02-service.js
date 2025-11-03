@@ -27,8 +27,23 @@ export function service() {
             
             // Redireciona após um breve delay
             setTimeout(() => {
-                window.location.href = './03-infoReq.html';
-            }, 800);
+                switch (servicoValue) {
+                    case "AUDIÊNCIA":
+                        window.location.href = './03-infoReq.html';
+                        break;
+                    
+                    case "CONSULTA":
+                        
+                        break;
+                    
+                    case "SERVIÇO  SOCIAL":
+                        window.location.href = './03-infoReq.html';
+                        break
+                    default:
+                        break;
+                }
+                
+            }, 500);
         });
     });
     
