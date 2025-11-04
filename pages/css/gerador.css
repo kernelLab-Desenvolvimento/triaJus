@@ -1,0 +1,131 @@
+.main_gerador {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--central-color);
+  border: 3px solid var(--forum-color);
+  width: 700px;
+  height: 400px;
+  border-radius: 10px;
+  margin-left: 10%;
+  margin-top: 5%;
+  position: relative; /* Adicionado para posicionamento interno */
+}
+
+.btn_ajuste_gerador {
+  margin-top: auto; /* Muda para auto para ficar na base */
+  margin-bottom: 20px;
+  gap: 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn_gerador {
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: var(--color-buton);
+  color: var(--text-p-h2);
+  padding: 20px 40px; /* Reduzido para caber melhor */
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btn_gerador:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn_gerador:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* -------------------- class elementos ---------------------------------*/
+.elementos {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tipo {
+  margin-top: 5px;
+  text-align: center;
+  font-size: 24px; /* Reduzido para caber melhor */
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 10px;
+}
+
+.nome {
+  margin-left: 30px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px; /* Reduzido */
+  margin-bottom: 5px;
+}
+
+.cpf {
+  margin-left: 30px;
+  font-weight: bold;
+  font-size: 20px; /* Reduzido */
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 5px;
+}
+
+.tipo-1 {
+  margin-left: 30px;
+  font-size: 20px; /* Reduzido */
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 10px;
+}
+
+.n {
+  text-align: center;
+  font-size: 70px; /* Reduzido */
+  font-weight: bold;
+  margin: 10px 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seu-h {
+  text-align: center;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px; /* Reduzido */
+  margin-bottom: 10px;
+}
+
+.data-class {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hora-class {
+  position: absolute;
+  top: 50px;
+  right: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.drop {
+  display: none; /* Elemento não utilizado */
+}
+
+/* Remove as classes problemáticas com position relative e bottom */

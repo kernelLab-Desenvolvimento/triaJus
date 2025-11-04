@@ -16,7 +16,6 @@
 
 body {
     display: flex;
-
 }
 
 a {
@@ -41,7 +40,6 @@ figure {
     text-align: center;
     color: var(--text-p-h2);
     font-weight: bold;
-
 }
 
 section {
@@ -52,23 +50,6 @@ section {
     padding: 20px;
 }
 
-
-
-p {
-
-
-    /*border: 1px solid #FFFFFF;*/
-    font-weight: bold;
-    color: #FFFFFF;
-    height: 200px;
-    font-size: 20px;
-    text-align: justify;
-    font-size: 15x;
-    border-radius: 15px;
-    padding: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 i {
     display: flex;
     font-size: 30px;
@@ -77,22 +58,17 @@ i {
     gap: 10px;
     color: var(--forum-color);
 }
-i.container{
-    display: flex;
-    gap: 40px;
+
+.bi-arrow-left-square-fill {
+    color: var(--text-p-h2);
 }
 
-    .bi-arrow-left-square-fill{
-        color: var(--text-p-h2);
-    }
-
-/* ============= TELA 01 ================ */
-
+/* ============= LAYOUT BASE ================ */
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap:60px;
+    gap: 60px;
     flex-flow: column;
     width: 500px;
     height: 100vh;
@@ -116,27 +92,62 @@ i.container{
     padding: 10px;
 }
 
+/* ============= COMPONENTES BASE ================ */
+button {
+    background-color: var(--color-buton);
+    color: var(--text-p-h2);
+    border: none;
+    cursor: pointer;
+    transition: 0.3s all;
+}
 
+button:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px);
+}
+
+/* ============= PÁGINA INICIAL - INDEX ================ */
+
+/* Container principal do texto informativo */
 .txt-informacao {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 20px;
-
-
+    width: 100%;
+    height: 100%;
 }
 
+/* Estilo do texto informativo */
 .txt {
     background-color: var(--forum-color);
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     border: 5px solid var(--color-buton);
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-button,
+.txt p {
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.6;
+    border-radius: 15px;
+    padding: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+/* Botão de confirmação */
 .btn-T1 {
+    margin-top: 20px;
+}
+
+.btn-T1 button {
     color: var(--central-color);
     background-color: var(--color-buton);
     border: none;
@@ -146,292 +157,30 @@ button,
     font-size: 20px;
     cursor: pointer;
     transition: 0.9s all;
-}
-
-.btn-T1:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    transform: translateY(-2px);
-}
-
-/* ============== TELA-002 ===================*/
-
-.container-main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: column;
-    background-color: var(--central-senha);
-    width: 500px;
-    height: 500px;
-    border: solid 2px var(--forum-color);
-    border-radius: 5px;
-}
-
-h1,
-.container-main {
-    align-items: center;
-    gap: 150px;
-    padding: 20px;
-    justify-content: flex-start;
-    font-size: 35px;
     font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
+    min-width: 150px;
 }
 
-.submit {
-    border: none;
-    padding: 10px;
-    color: var(--text-color);
-    background-color: var(--color-buton);
-    border-radius: 5px;
-    padding: 25px 30px;
-    cursor: pointer;
-    transition: 0.9s all;
-
-}
-
-.submit:hover {
-    color: var(--text-p-h2);
+.btn-T1 button:hover {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
     transform: translateY(-2px);
-
+    background-color: #3a3da0;
 }
 
-.CPF {
-    padding: 5px;
-    border: solid 3px var(--color-buton);
-    border-radius: 5px;
-    outline: none;
+/* Responsividade */
+@media (max-width: 768px) {
+    .txt {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .txt p {
+        font-size: 14px;
+        padding: 10px;
+    }
+    
+    .btn-T1 button {
+        padding: 12px 20px;
+        font-size: 18px;
+    }
 }
-
-/* ======================== TELA-003 ================= */
-
-.container-op {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: column;
-    background-color: var(--central-senha);
-    width: 500px;
-    height: 500px;
-    border: solid 2px var(--forum-color);
-    border-radius: 5px;
-    gap: 25px;
-    padding: 20px;
-    font-size: 35px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.btn {
-    display: flex;
-    align-items: center;
-    flex-flow: column;
-    gap: 20px
-}
-
-.btn-1 {
-    justify-content: center;
-    font-size: 22px;
-    background-color: var(--color-buton);
-    color: var(--text-p-h2);
-    padding: 30px 40px;
-    font-weight: bold;
-    border-radius: 15px;
-    border: none;
-    cursor: pointer;
-    transition: 0.5s all;
-}
-
-.btn-2 {
-    justify-content: center;
-    background-color: var(--color-buton);
-    color: var(--text-p-h2);
-    padding: 30px 40px;
-    font-weight: bold;
-    border-radius: 15px;
-    border: none;
-    cursor: pointer;
-    transition: 0.5s all;
-}
-
-.btn-3 {
-    justify-content: center;
-    background-color: var(--color-buton);
-    color: var(--text-p-h2);
-    font-weight: bold;
-    padding: 20px 5px;
-    border-radius: 15px;
-    border: none;
-    cursor: pointer;
-    transition: 0.5s all;
-}
-
-.btn-1:hover {
-
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    transform: translateY(-2px);
-    color: var(--central-color);
-}
-
-.btn-2:hover {
-
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    transform: translateY(-2px);
-    color: var(--central-color);
-}
-
-.btn-3:hover {
-
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    transform: translateY(-2px);
-    color: var(--central-color);
-}
-
-/* ==================== Tela 004 ================== */
-.container-aud {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: column;
-    background-color: var(--central-senha);
-    width: 500px;
-    height: 500px;
-    border: solid 2px var(--forum-color);
-    border-radius: 5px;
-}
-
-h1,
-.container-aud {
-    align-items: center;
-    gap: 10px;
-    padding: 20px;
-    justify-content: flex-start;
-    font-size: 35px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.selecao-ho {
-    font-size: 30px;
-}
-
-.btn-T4 {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px;
-}
-
-button,
-.ho-1 {
-    background-color: var(--color-buton);
-    border-radius: 10px;
-    padding: 10px 12px;
-    transition: 0.9s all;
-}
-
-.ho-3,
-.ho-2 {
-    background-color: var(--color-buton);
-    border-radius: 10px;
-    border: none;
-    padding: 10px;
-    transition: 0.9s all;
-}
-
-.ho-1:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    transform: translateY(-2px);
-    color: var(--central-color);
-}
-
-.ho-2:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    transform: translateY(-2px);
-    color: var(--central-color);
-}
-
-.ho-3:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    transform: translateY(-2px);
-    color: var(--central-color);
-}
-
-.opcao {
-    font-size: 30px;
-}
-
-.op {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    gap: 30px;
-}
-
-
-.li-1 {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.li-2 {
-    display: flex;
-    gap: 26px;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.li-3 {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.r-1 {
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-}
-
-.r-2 {
-
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-}
-
-.r-3 {
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-}
-
-.btn-op-1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-op {
-    background-color: var(--color-buton);
-    border-radius: 5px;
-    border: none;
-    padding: 15px;
-    transition: 0.9s all;
-}
-
-.btn-op:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    transform: translateY(-2px);
-    color: var(--central-color);
-}
-
-
-
-
-
-
-
-
