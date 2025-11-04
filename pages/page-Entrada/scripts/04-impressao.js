@@ -1,3 +1,6 @@
+import { sequencialGen } from "../../src/ticketGen.js";
+import {atualizarDataHora} from "../../src/ticketGen.js"
+
 export function impressao() {
     // Elementos da página
     const cpfSpan = document.getElementById('cpf');
@@ -14,10 +17,10 @@ export function impressao() {
     const servico = localStorage.getItem('servico');
     const horario = localStorage.getItem('horario');
     const req = localStorage.getItem('req');
-    const userCPF = localStorage.getItem('userCPF');
+    const userCPF = localStorage.getItem('cpf');
 
     // Gera número sequencial
-    const numeroSequencial = gerarNumeroSequencial();
+    const numeroSequencial = sequencialGen(servico, horario);
 
     // Atualiza a interface com os dados
     function atualizarInterface() {
@@ -31,11 +34,10 @@ export function impressao() {
 
         // Atualiza serviço com req se existir
         if (servico) {
-            const servicoTexto = converterServicoParaTexto(servico);
-            let displayText = servicoTexto;
+            let displayText = servico;
             
             // Adiciona req se existir (apenas para audiência)
-            if (req && servico === 'AUDIENCIA') {
+            if (req && servico === 'AUDIÊNCIA') {
                 displayText += `: ${req}`;
             }
             
@@ -45,7 +47,7 @@ export function impressao() {
         }
 
         // Mostra/oculta horário baseado no serviço
-        if (horario && (servico === 'AUDIENCIA' || servico === 'SERVICO_SOCIAL')) {
+        if (servico === 'AUDIÊNCIA' || servico === 'SERVICO_SOCIAL') {
             horarioSpan.textContent = horario;
             horarioSection.style.display = 'block';
         } else {
@@ -56,7 +58,9 @@ export function impressao() {
         numeroSpan.textContent = numeroSequencial.toString().padStart(3, '0');
 
         // Atualiza data e hora atual
-        atualizarDataHora();
+        const dataHora = atualizarDataHora();
+        dataSpan.textContent = dataHora.data;
+        horaSpan.textContent = dataHora.hora;
     }
 
     // Formata CPF
@@ -65,39 +69,10 @@ export function impressao() {
         return cpfString.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
     }
 
-    // Converte serviço para texto amigável
-    function converterServicoParaTexto(servico) {
-        const servicos = {
-            'AUDIENCIA': 'AUDIÊNCIA',
-            'CONSULTA_PROCESSOS': 'CONSULTA',
-            'SERVICO_SOCIAL': 'SERVIÇO SOCIAL'
-        };
-        return servicos[servico] || servico;
-    }
 
-    // Gera número sequencial
-    function gerarNumeroSequencial() {
-        let ultimoNumero = parseInt(localStorage.getItem('ultimoNumero')) || 0;
-        ultimoNumero = (ultimoNumero % 999) + 1;
-        localStorage.setItem('ultimoNumero', ultimoNumero.toString());
-        return ultimoNumero;
-    }
+    
 
-    // Atualiza data e hora atual
-    function atualizarDataHora() {
-        const agora = new Date();
-        
-        // Formata data: DD/MM/AAAA
-        const dia = agora.getDate().toString().padStart(2, '0');
-        const mes = (agora.getMonth() + 1).toString().padStart(2, '0');
-        const ano = agora.getFullYear();
-        dataSpan.textContent = `${dia}/${mes}/${ano}`;
-        
-        // Formata hora: HH:MM
-        const horas = agora.getHours().toString().padStart(2, '0');
-        const minutos = agora.getMinutes().toString().padStart(2, '0');
-        horaSpan.textContent = `${horas}:${minutos}`;
-    }
+
 
     // Função para confirmar e tocar áudio
     function confirmarAtendimento() {
@@ -106,6 +81,7 @@ export function impressao() {
             audio.play().catch(error => {
                 console.log('Erro ao reproduzir áudio:', error);
             });
+            localStorage.setItem('seqCons', 0)
         }
 
         // Simula impressão/confirmação
