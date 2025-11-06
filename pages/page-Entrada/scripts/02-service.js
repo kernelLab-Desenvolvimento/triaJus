@@ -17,7 +17,7 @@ export function service() {
             this.style.color = 'white';
             
             // Obtém o texto do botão (ou pode usar o title do div pai)
-            const servico = this.textContent.trim();
+            const servico = this.getAttribute('data-servico');
             const servicoValue = servico.replace('<br>', ' '); // Remove quebras de linha
             
             // Armazena no localStorage
@@ -28,15 +28,15 @@ export function service() {
             // Redireciona após um breve delay
             setTimeout(() => {
                 switch (servicoValue) {
-                    case "AUDIÊNCIA":
+                    case "audiencia":
                         window.location.href = '../html/03-infoReq.html';
                         break;
                     
-                    case "CONSULTA":
+                    case "consulta":
                         window.location.href = '../html/04-impressao.html';
                         break;
                     
-                    case "SERVIÇO  SOCIAL":
+                    case "servicoSocial":
                         window.location.href = '../html/03-infoReq.html';
                         break
                     default:

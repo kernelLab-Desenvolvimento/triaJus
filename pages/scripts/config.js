@@ -1,5 +1,12 @@
 /*configurações globais */
-export const API_BASE_URL = 'http://localhost:3001/api';
+const getSimpleIP = () => {
+  return window.location.hostname;
+};
+
+export const API_BASE_URL = `http://${getSimpleIP()}:3001/api`;
+
+// ✅ NOVO: Configuração WebSocket
+export const WEBSOCKET_URL = `ws://${getSimpleIP()}:8080`;
 
 /*funções para data e hora */
 export function dataAtual() {
@@ -41,16 +48,34 @@ export async function fetchAPI(endpoint, method, data = null) {
     method,
     headers: {
       'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data) || undefined
+    }
   };
+
+  // Só adiciona body se existir dados e method não for GET/HEAD
+  if (data && !['GET', 'HEAD'].includes(method.toUpperCase())) {
+    options.body = JSON.stringify(data);
+  }
+
   try {
-    console.log("Chamada",`${API_BASE_URL}/${endpoint}`, options);
+    console.log("Chamada API:", `${API_BASE_URL}/${endpoint}`, options);
     const response = await fetch(`${API_BASE_URL}/${endpoint}`, options);
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => null);
-      throw new Error(errorData?.message || `Erro HTTP: ${response.status}`);
+      let errorMessage = `Erro HTTP: ${response.status}`;
+      
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.error || errorMessage;
+      } catch {
+        // Se não conseguir parsear JSON, usa a mensagem padrão
+      }
+      
+      throw new Error(errorMessage);
+    }
+
+    // Para respostas sem conteúdo (ex: 204 No Content)
+    if (response.status === 204) {
+      return { success: true };
     }
 
     return await response.json();

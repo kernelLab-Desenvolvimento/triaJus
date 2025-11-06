@@ -5,11 +5,11 @@ export function sequencialGen(servico, horario) {
     const seq = horario;
     let sequ = localStorage.getItem('seqCons')
     switch (servico) {
-        case "AUDIÊNCIA":
+        case "audiencia":
             ticket = texto.slice(0,3) + seq.slice(0,2);
             break;
         
-        case "CONSULTA":
+        case "consulta":
             // Garantir que sequ seja um número, tratando null/undefined
             let numeroSequencial = parseInt(sequ) || 0;
             
@@ -22,7 +22,7 @@ export function sequencialGen(servico, horario) {
             }
             break;
         
-        case "SERVIÇO  SOCIAL":
+        case "servicoSocial":
             ticket = "SS" + seq.slice(0,2);
             break
         default:
