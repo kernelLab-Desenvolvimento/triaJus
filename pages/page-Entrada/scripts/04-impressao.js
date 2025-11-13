@@ -1,5 +1,6 @@
 import { sequencialGen } from "../../src/ticketGen.js";
-import {atualizarDataHora} from "../../src/ticketGen.js"
+import { dataAtual, fetchAPI } from "../../scripts/config.js";
+import { horaAtual } from "../../scripts/config.js";
 
 export function impressao() {
     // Elementos da página
@@ -58,9 +59,8 @@ export function impressao() {
         numeroSpan.textContent = numeroSequencial.toString().padStart(3, '0');
 
         // Atualiza data e hora atual
-        const dataHora = atualizarDataHora();
-        dataSpan.textContent = dataHora.data;
-        horaSpan.textContent = dataHora.hora;
+        dataSpan.textContent = dataAtual();
+        horaSpan.textContent = horaAtual();
     }
 
     // Formata CPF
@@ -69,20 +69,8 @@ export function impressao() {
         return cpfString.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
     }
 
-
-    
-
-
-
     // Função para confirmar e tocar áudio
-    function confirmarAtendimento() {
-        // Toca o áudio
-        if (audio) {
-            audio.play().catch(error => {
-                console.log('Erro ao reproduzir áudio:', error);
-            });
-            localStorage.setItem('seqCons', 0)
-        }
+    async function confirmarAtendimento() {
 
         // Simula impressão/confirmação
         console.log('=== COMPROVANTE DE ATENDIMENTO ===');
@@ -99,18 +87,40 @@ export function impressao() {
         confirmarBtn.style.backgroundColor = '#28a745';
         confirmarBtn.disabled = true;
 
-        // Redireciona para página inicial após 3 segundos
-        setTimeout(() => {
-            window.location.href = '../../../index.html';
-        }, 3000);
-    }
 
+        const data = {
+            id: numeroSequencial,
+            CPF: localStorage.getItem('cpf') || '',
+            ticket: numeroSequencial,
+            servico: localStorage.getItem('servico') || '',
+            horario: localStorage.getItem('horario') || '',
+            req: localStorage.getItem('req') || ''
+        };
+
+        try {
+    const endpointMap = {
+        'audiencia': 'audiencia',
+        'consulta': 'consulta', 
+        'servicoSocial': 'servicosocial',
+        'chamada': 'chamada'
+    };
+
+    const endpoint = endpointMap[data.servico];
+
+    const resp = await fetchAPI(endpoint, 'POST', data);
+    console.log('Resposta da API:', resp);
+    
+    // ✅ CORREÇÃO: Caminho absoluto a partir da raiz
+    window.location.href = '/index.html';
+    
+} catch (error) {
+    console.error('Erro na chamada API:', error);
+    alert('Erro ao agendar. Tente novamente.');
+}
+    }
     // Event listeners
     confirmarBtn.addEventListener('click', confirmarAtendimento);
-
-    // Atualiza data e hora a cada minuto
-    setInterval(atualizarDataHora, 60000);
-
+    
     // Inicialização
     atualizarInterface();
 
