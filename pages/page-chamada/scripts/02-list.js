@@ -2,6 +2,7 @@ import { API_BASE_URL, showError } from '../../scripts/config.js';
 
 class FilaAtendimento {
     constructor() {
+        this.sec = localStorage.getItem('section');
         this.ws = null;
         this.sessaoSelecionada = '08:00';
         this.dadosFila = [];
@@ -15,6 +16,7 @@ class FilaAtendimento {
     }
 
     configurarWebSocket() {
+        console.log("section: ", this.sec);
         const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
         const wsUrl = `${wsProtocol}//${window.location.hostname}:8080`;
         
@@ -23,7 +25,7 @@ class FilaAtendimento {
         this.ws.onopen = () => {
             console.log('✅ WebSocket conectado');
             // Informa ao servidor que queremos escutar a tabela de audiência
-            this.ws.send(JSON.stringify({ type: 'audiencia' }));
+            this.ws.send(JSON.stringify({ type: this.sec }));
         };
 
         this.ws.onmessage = (event) => {
@@ -31,7 +33,7 @@ class FilaAtendimento {
                 const data = JSON.parse(event.data);
                 console.log('📨 Mensagem WebSocket:', data);
                 
-                if (data.type === 'NEW_RECORD' && data.table === 'audiencia') {
+                if (data.type === 'NEW_RECORD' && data.table === this.sec) {
                     this.adicionarNaFila(data.data);
                 }
             } catch (error) {
@@ -73,7 +75,8 @@ class FilaAtendimento {
 
     async carregarDadosIniciais() {
         try {
-            const response = await fetch(`${API_BASE_URL}/audiencia`);
+            
+            const response = await fetch(`${API_BASE_URL}/${this.sec}`);
             const result = await response.json();
             
             if (result.data) {
@@ -97,10 +100,18 @@ class FilaAtendimento {
     }
 
     filtrarPorSessao() {
-        // Filtra os dados pela sessão selecionada
-        const dadosFiltrados = this.dadosFila.filter(item => 
-            item.horario === this.sessaoSelecionada
-        );
+        // Obtém a section do localStorage
+        const sec = localStorage.getItem('section');
+        
+        // Filtra os dados pela sessão selecionada apenas se não for "consulta"
+        let dadosFiltrados = null;
+        if (sec !== "consulta") {
+            dadosFiltrados = this.dadosFila.filter(item => 
+                item.horario === this.sessaoSelecionada
+            );
+        } else {
+            dadosFiltrados = this.dadosFila; // Mostra todos os dados sem filtro
+        }
 
         // Limita a 6 registros (número de linhas na tabela)
         const dadosParaExibir = dadosFiltrados.slice(0, 6);
@@ -191,3 +202,4 @@ class FilaAtendimento {
 document.addEventListener('DOMContentLoaded', () => {
     window.filaAtendimento = new FilaAtendimento();
 });
+

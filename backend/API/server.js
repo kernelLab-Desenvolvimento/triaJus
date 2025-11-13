@@ -3,7 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const WebSocket = require('ws');
 const cors = require('cors');
 const path = require('path');
-
+const os = require('os');
 const app = express();
 const PORT = 3001;
 
@@ -19,6 +19,16 @@ const db = new sqlite3.Database('./database.sqlite', (err) => {
         console.log('Conectado ao SQLite.');
         initializeDatabase();
     }
+});
+
+// ✅ SERVIR ARQUIVOS ESTÁTICOS (Adicione esta linha)
+app.use(express.static(path.join(__dirname, '../../')));
+
+// Suas outras rotas e configurações...
+
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Acesse: http://10.0.0.157:${PORT}/index.html`);
 });
 
 app.use(cors());
@@ -161,7 +171,6 @@ app.post('/api/consulta', (req, res) => {
         const newRecord = {
             ID: this.lastID,
             ticket,
-        
             CPF,
             servico
         };
@@ -195,7 +204,6 @@ app.post('/api/servicosocial', (req, res) => {
         const newRecord = {
             ID: this.lastID,
             ticket,
-        
             CPF,
             servico,
             horario
@@ -264,7 +272,29 @@ app.get('/api/:table', (req, res) => {
     });
 });
 
+
+
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-    console.log(`WebSocket rodando na porta 8080`);
+    const networkInterfaces = os.networkInterfaces();
+    const addresses = [];
+    
+    // Coletar todos os IPs
+    for (const interfaceName in networkInterfaces) {
+        for (const interface of networkInterfaces[interfaceName]) {
+            if (interface.family === 'IPv4' && !interface.internal) {
+                addresses.push(interface.address);
+            }
+        }
+    }
+    
+    console.log('=== SERVIDOR INICIADO ===');
+    console.log(`📡 Servidor rodando na porta: ${PORT}`);
+    console.log(`🌐 WebSocket rodando na porta: 8080`);
+    console.log(`🖥️  IPs disponíveis:`);
+    addresses.forEach(ip => {
+        console.log(`   → http://${ip}:${PORT}`);
+    });
+    console.log(`📍 Local: http://localhost:${PORT}`);
+    console.log(`📁 Diretório do servidor: ${__dirname}`);
+    console.log('==========================');
 });

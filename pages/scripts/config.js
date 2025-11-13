@@ -4,6 +4,7 @@ const getSimpleIP = () => {
 };
 
 export const API_BASE_URL = `http://${getSimpleIP()}:3001/api`;
+console.log(getSimpleIP);
 
 // ✅ NOVO: Configuração WebSocket
 export const WEBSOCKET_URL = `ws://${getSimpleIP()}:8080`;
@@ -34,7 +35,7 @@ function createErrorMessageElement() {
               top: 20px;
               right: 20px;
               padding: 15px;
-              background: #ff4444;
+              background-color: #ff4444;
               color: white;
               border-radius: 5px;
               display: none;

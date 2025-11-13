@@ -14,17 +14,15 @@ export function authAt() {
             
             // Adiciona a classe 'selected' ao botão clicado
             this.classList.add('selected');
-            this.style.backgroundColor = '#007bff';
+            this.style.backgroundColor = '#405e7eff';
             this.style.color = 'white';
             
             // Obtém o texto do botão
-            const servico = this.textContent.trim();
-            const servicoValue = servico.replace(/\s+/g, ' '); // Remove múltiplos espaços e quebras
+            const servico = this.getAttribute('data-servico');
             
             // Armazena no localStorage
-            localStorage.setItem('section', servicoValue); // Corrigido: era 'section'
-            console.log('Serviço selecionado:', servicoValue);
-            console.log('Serviço no localStorage:', localStorage.getItem('servico'));
+            localStorage.setItem('section', servico);
+            console.log('Serviço no localStorage:', localStorage.getItem('section'));
             
             // Redireciona após um breve delay
             setTimeout(() => {
