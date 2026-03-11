@@ -272,6 +272,17 @@ app.get('/api/:table', (req, res) => {
     });
 });
 
+//GET - Tela de Entrada
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../', 'index.html'));
+});
+
+
+//GET - Tela de Operação
+app.get('/entrada', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../', 'pages/page-chamada/html/01-authAt.html'));
+});
+
 
 
 app.listen(PORT, () => {
