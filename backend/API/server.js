@@ -119,169 +119,17 @@ function broadcastToTable(table, data) {
     }
 }
 
+//Envia o acesso ao banco e a broadcastToTable funcao pela request 
+app.use((req, res, next) => {
+    req.db = db;
+    console.log(db)
+    req.broadcastToTable = broadcastToTable;
+    next();
+});
+//Importa Rotas de usersrouter
+const usersRoutes = require('./routes/usersrouter');
 // Rotas da API
-// POST - Audiencia
-app.post('/api/audiencia', (req, res) => {
-    const { ticket, CPF, servico, horario, req: requisito } = req.body;
-    
-    const sql = `INSERT INTO audiencia (ticket, CPF, servico, horario, req) 
-                 VALUES (?, ?, ?, ?, ?)`;
-    
-    db.run(sql, [ticket, CPF, servico, horario, requisito], function(err) {
-        if (err) {
-            return res.status(400).json({ error: err.message });
-        }
-        
-        const newRecord = {
-            ID: this.lastID,
-            ticket,
-            CPF,
-            servico,
-            horario,
-            req: requisito
-        };
-        
-        // Broadcast via WebSocket
-        broadcastToTable('audiencia', {
-            type: 'NEW_RECORD',
-            table: 'audiencia',
-            data: newRecord
-        });
-        
-        res.json({ 
-            success: true, 
-            message: 'Registro de audiência criado',
-            data: newRecord
-        });
-    });
-});
-
-// POST - Consulta
-app.post('/api/consulta', (req, res) => {
-    const { ticket, CPF, servico } = req.body;
-    
-    const sql = `INSERT INTO consulta (ticket, CPF, servico) 
-                 VALUES (?, ?, ?)`;
-    
-    db.run(sql, [ticket, CPF, servico], function(err) {
-        if (err) {
-            return res.status(400).json({ error: err.message });
-        }
-        
-        const newRecord = {
-            ID: this.lastID,
-            ticket,
-            CPF,
-            servico
-        };
-        
-        broadcastToTable('consulta', {
-            type: 'NEW_RECORD',
-            table: 'consulta',
-            data: newRecord
-        });
-        
-        res.json({ 
-            success: true, 
-            message: 'Registro de consulta criado',
-            data: newRecord
-        });
-    });
-});
-
-// POST - ServicoSocial
-app.post('/api/servicosocial', (req, res) => {
-    const { ticket, CPF, servico, horario } = req.body;
-    
-    const sql = `INSERT INTO servicoSocial (ticket, CPF, servico, horario) 
-                 VALUES (?, ?, ?, ?)`;
-    
-    db.run(sql, [ticket, CPF, servico, horario], function(err) {
-        if (err) {
-            return res.status(400).json({ error: err.message });
-        }
-        
-        const newRecord = {
-            ID: this.lastID,
-            ticket,
-            CPF,
-            servico,
-            horario
-        };
-        
-        broadcastToTable('servicoSocial', {
-            type: 'NEW_RECORD',
-            table: 'servicoSocial',
-            data: newRecord
-        });
-        
-        res.json({ 
-            success: true, 
-            message: 'Registro de serviço social criado',
-            data: newRecord
-        });
-    });
-});
-
-// POST - Chamada
-app.post('/api/chamada', (req, res) => {
-    const { ticket } = req.body;
-    
-    const sql = `INSERT INTO chamada (ticket) VALUES (?)`;
-    
-    db.run(sql, [ticket], function(err) {
-        if (err) {
-            return res.status(400).json({ error: err.message });
-        }
-        
-        const newRecord = {
-            ID: this.lastID,
-            ticket
-        };
-        
-        broadcastToTable('chamada', {
-            type: 'NEW_RECORD',
-            table: 'chamada',
-            data: newRecord
-        });
-        
-        res.json({ 
-            success: true, 
-            message: 'Registro de chamada criado',
-            data: newRecord
-        });
-    });
-});
-
-// GET - Todas as tabelas
-app.get('/api/:table', (req, res) => {
-    const table = req.params.table;
-    const validTables = ['audiencia', 'consulta', 'servicoSocial', 'chamada'];
-    
-    if (!validTables.includes(table)) {
-        return res.status(404).json({ error: 'Tabela não encontrada' });
-    }
-    
-    const sql = `SELECT * FROM ${table} ORDER BY created_at DESC`;
-    
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            return res.status(400).json({ error: err.message });
-        }
-        res.json({ data: rows });
-    });
-});
-
-//GET - Tela de Entrada
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../', 'index.html'));
-});
-
-
-//GET - Tela de Operação
-app.get('/entrada', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../', 'pages/page-chamada/html/01-authAt.html'));
-});
+app.use('/', usersRoutes);
 
 
 
