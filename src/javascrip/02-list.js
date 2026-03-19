@@ -1,4 +1,4 @@
-import { API_BASE_URL, showError } from '../../scripts/config.js';
+import { API_BASE_URL, showError } from '/src/javascrip/config.js';
 
 class FilaAtendimento {
     constructor() {

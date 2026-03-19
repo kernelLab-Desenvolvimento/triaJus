@@ -1,4 +1,4 @@
-import { showError } from '../../scripts/config.js';
+import { showError } from '/src/javascrip/config.js';
 
 class ChamadaAtual {
     constructor() {

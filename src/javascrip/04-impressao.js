@@ -38,7 +38,7 @@ export function impressao() {
             let displayText = servico;
             
             // Adiciona req se existir (apenas para audiência)
-            if (req && servico === 'AUDIÊNCIA') {
+            if (req && servico === 'audiencia') {
                 displayText += `: ${req}`;
             }
             
@@ -48,7 +48,7 @@ export function impressao() {
         }
 
         // Mostra/oculta horário baseado no serviço
-        if (servico === 'AUDIÊNCIA' || servico === 'SERVICO_SOCIAL') {
+        if (servico === 'audiencia' || servico === 'servicoSocial') {
             horarioSpan.textContent = horario;
             horarioSection.style.display = 'block';
         } else {

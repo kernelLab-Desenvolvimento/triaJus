@@ -1,0 +1,82 @@
+Listagem de caminhos de pasta
+O número de série do volume é 9CEF-E7AC
+C:.
+|   .gitignore
+|   arvore.txt
+|   LICENSE
+|   package-lock.json
+|   package.json
+|   PastaLista.txt
+|   readme.md
+|   server.js
+|   
++---.document
+|   \---IMG
+|           systemDesign(triaJus)_terminal-Entrada.png
+|           systemDesign(triaJus)_terminal-Operacao.png
+|           systemDesign(triaJus)_terminal-Saida.png
+|           
++---.github
+|   \---ISSUE_TEMPLATE
+|           custom.md
+|           feature_request.md
+|           
++---config
+|   +---database
+|   |       database.js
+|   |       database.sqlite
+|   |       
+|   +---middleware
+|   |       database.middlewares.js
+|   |       
+|   +---routes
+|   |       apirouter.js
+|   |       usersrouter.js
+|   |       
+|   +---services
+|   |       cpfVerify.js
+|   |       ticketGen.js
+|   |       
+|   \---websocket
+|           websocket.js
+|           
++---public
+|   |   01-auth.html
+|   |   02-service.html
+|   |   03-infoReq.html
+|   |   04-impressao.html
+|   |   chamador.html
+|   |   index.html
+|   |   
+|   +---admin
+|   |       01-authAt.html
+|   |       02-list.html
+|   |       
+|   \---img
+|           branca.png
+|           can tuc.png
+|           fablab.png
+|           FÓRUM.png
+|           
+\---src
+    +---css
+    |       01-auth.css
+    |       02-service.css
+    |       03-infoReq.css
+    |       04-impressao.css
+    |       gerador.css
+    |       index.css
+    |       tela-07.css
+    |       tela-08.css
+    |       
+    \---javascrip
+            01-auth.js
+            01-authAt.js
+            02-list.js
+            02-service.js
+            03-infoReq.js
+            04-impressao.js
+            chamador.js
+            config.js
+            main.js
+            
