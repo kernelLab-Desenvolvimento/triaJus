@@ -1,19 +1,20 @@
-// ../page-Entrada/scripts/01-auth.js
-/*imports*/
-import { verifyCPF } from "../../src/cpfVerify.js";
+import { verifyCPF } from "/config/services/cpfVerify.js";
 
 export function auth() {
-    // Elementos DOM
     const cpfInput = document.getElementById('cpfInput');
     const cpfForm = document.getElementById('cpfForm');
     const cpfMessage = document.getElementById('cpfMessage');
 
-    // Formatação do CPF enquanto digita
+    // ✅ Verifica se os elementos existem antes de usar
+    if (!cpfInput || !cpfForm || !cpfMessage) {
+        console.warn('Elementos do formulário não encontrados');
+        return;
+    }
+
     cpfInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
         
         if (value.length <= 11) {
-            // Formatação: XXX.XXX.XXX-XX
             if (value.length > 9) {
                 value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
             } else if (value.length > 6) {
@@ -24,34 +25,24 @@ export function auth() {
             e.target.value = value;
         }
         
-        // Verificação em tempo real
-        verifyCPF(value.replace(/\D/g, ''));
+        verifyCPF(value.replace(/\D/g, ''), cpfMessage);
     });
 
-    // Submissão do formulário
     cpfForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const cpf = cpfInput.value.replace(/\D/g, '');
         
-        if (cpf.length === 11 && verifyCPF(cpf)) {
+        if (cpf.length === 11 && verifyCPF(cpf, cpfMessage)) {
             localStorage.setItem('cpf', cpf.toString());
+            console.log("cpf armazenado:", localStorage.getItem('cpf'));
             
-            if (cpfMessage) {
-                console.log("cpf armazenado");
-                console.log(localStorage.getItem('cpf'));
-            }
-            
-            // Redireciona após 1 segundo
             setTimeout(() => {
                 window.location.href = './02-service.html';
             }, 1000);
         } else {
-            if (cpfMessage) {
-                cpfMessage.innerHTML = '<span style="color: red;">Por favor, insira um CPF válido</span>';
-            }
+            cpfMessage.innerHTML = '<span style="color: red;">Por favor, insira um CPF válido</span>';
         }
     });
-
-
 }
+

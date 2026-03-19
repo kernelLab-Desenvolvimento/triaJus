@@ -1,9 +1,9 @@
-import { auth } from '../page-Entrada/scripts/01-auth.js';
-import { authAt } from '../page-chamada/scripts/01-authAt.js'; // ✅ Import separado
-import { service } from '../page-Entrada/scripts/02-service.js';
-import { infoReq } from '../page-Entrada/scripts/03-infoReq.js';
-import { impressao } from '../page-Entrada/scripts/04-impressao.js';
-import { showError } from './config.js';
+import { auth } from '/src/javascrip/01-auth.js';
+import { authAt } from '/src/javascrip/01-authAt.js';
+import { service } from '/src/javascrip/02-service.js';
+import { infoReq } from '/src/javascrip/03-infoReq.js';
+import { impressao } from '/src/javascrip/04-impressao.js';
+import { showError } from '/src/javascrip/config.js';
 
 // Inicialização da aplicação
 window.addEventListener("DOMContentLoaded", async () => {

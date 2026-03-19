@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
+const {dbAcess} = require('../middleware/database.middlewares')
+
+
 
 // Rotas da API
 // POST - Audiencia
-router.post('/api/audiencia', (req, res) => {
+router.post('/audiencia', dbAcess, (req, res) => {
     const { db, broadcastToTable } = req;
     const { ticket, CPF, servico, horario, req: requisito } = req.body;
     
@@ -42,7 +45,7 @@ router.post('/api/audiencia', (req, res) => {
 });
 
 // POST - Consulta
-router.post('/api/consulta', (req, res) => {
+router.post('/consulta', dbAcess, (req, res) => {
     const { db, broadcastToTable } = req;
     const { ticket, CPF, servico } = req.body;
     
@@ -76,7 +79,7 @@ router.post('/api/consulta', (req, res) => {
 });
 
 // POST - ServicoSocial
-router.post('/api/servicosocial', (req, res) => {
+router.post('/servicosocial', dbAcess, (req, res) => {
     const { db, broadcastToTable } = req;
     const { ticket, CPF, servico, horario } = req.body;
     
@@ -111,7 +114,7 @@ router.post('/api/servicosocial', (req, res) => {
 });
 
 // POST - Chamada
-router.post('/api/chamada', (req, res) => {
+router.post('/chamada', dbAcess, (req, res) => {
     const { db, broadcastToTable } = req;
     const { ticket } = req.body;
     
@@ -142,7 +145,7 @@ router.post('/api/chamada', (req, res) => {
 });
 
 // GET - Todas as tabelas
-router.get('/api/:table', (req, res) => {
+router.get('/:table', dbAcess, (req, res) => {
     const { db } = req;
     const table = req.params.table;
     const validTables = ['audiencia', 'consulta', 'servicoSocial', 'chamada'];
@@ -161,20 +164,5 @@ router.get('/api/:table', (req, res) => {
     });
 });
 
-//GET - Tela de Entrada
-router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../', 'index.html'));
-});
-
-
-//GET - Tela de Operação
-router.get('/entrada', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../', 'pages/page-chamada/html/01-authAt.html'));
-});
-
-//GET - Tela de Chamadas
-router.get('/painel-de-chamada', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../', 'pages/page-Saida/html/chamador.html'));
-});
 
 module.exports = router;

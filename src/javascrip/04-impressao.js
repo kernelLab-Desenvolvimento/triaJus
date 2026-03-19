@@ -1,6 +1,6 @@
-import { sequencialGen } from "../../src/ticketGen.js";
-import { dataAtual, fetchAPI } from "../../scripts/config.js";
-import { horaAtual } from "../../scripts/config.js";
+import { sequencialGen } from "/config/services/ticketGen.js";
+import { dataAtual, fetchAPI } from "/src/javascrip/config.js";
+import { horaAtual } from "/src/javascrip/config.js";
 
 export function impressao() {
     // Elementos da página
@@ -71,53 +71,51 @@ export function impressao() {
 
     // Função para confirmar e tocar áudio
     async function confirmarAtendimento() {
+    confirmarBtn.textContent = 'CONFIRMADO!';
+    confirmarBtn.style.backgroundColor = '#28a745';
+    confirmarBtn.disabled = true;
 
-        // Simula impressão/confirmação
-        console.log('=== COMPROVANTE DE ATENDIMENTO ===');
-        console.log('CPF:', cpfSpan.textContent);
-        console.log('Serviço:', servicoDisplay.textContent);
-        console.log('Horário:', horarioSection.style.display !== 'none' ? horarioSpan.textContent : 'N/A');
-        console.log('Senha:', numeroSpan.textContent);
-        console.log('Data:', dataSpan.textContent);
-        console.log('Hora:', horaSpan.textContent);
-        console.log('================================');
+    const servicoAtual = localStorage.getItem('servico') || '';
 
-        // Feedback visual
-        confirmarBtn.textContent = 'CONFIRMADO!';
-        confirmarBtn.style.backgroundColor = '#28a745';
-        confirmarBtn.disabled = true;
-
-
-        const data = {
-            id: numeroSequencial,
-            CPF: localStorage.getItem('cpf') || '',
-            ticket: numeroSequencial,
-            servico: localStorage.getItem('servico') || '',
-            horario: localStorage.getItem('horario') || '',
-            req: localStorage.getItem('req') || ''
-        };
-
-        try {
-    const endpointMap = {
-        'audiencia': 'audiencia',
-        'consulta': 'consulta', 
-        'servicoSocial': 'servicosocial',
-        'chamada': 'chamada'
+    const data = {
+        CPF: localStorage.getItem('cpf') || '',
+        ticket: numeroSequencial,
+        servico: servicoAtual,
+        horario: localStorage.getItem('horario') || '',
+        req: localStorage.getItem('req') || ''
     };
 
-    const endpoint = endpointMap[data.servico];
+    // ✅ Log para depuração — veja no console qual valor chega
+    console.log('Dados para envio:', data);
 
-    const resp = await fetchAPI(endpoint, 'POST', data);
-    console.log('Resposta da API:', resp);
-    
-    // ✅ CORREÇÃO: Caminho absoluto a partir da raiz
-    window.location.href = '/index.html';
-    
-} catch (error) {
-    console.error('Erro na chamada API:', error);
-    alert('Erro ao agendar. Tente novamente.');
-}
+    const endpointMap = {
+        'audiencia':     'audiencia',
+        'consulta':      'consulta',
+        'servicoSocial': 'servicosocial',
+    };
+
+    const endpoint = endpointMap[servicoAtual];
+
+    // ✅ Garante que o endpoint existe antes de chamar a API
+    if (!endpoint) {
+        console.error('Serviço inválido ou não mapeado:', servicoAtual);
+        alert(`Serviço inválido: "${servicoAtual}". Volte e selecione novamente.`);
+        confirmarBtn.disabled = false;
+        confirmarBtn.textContent = 'CONFIRMAR';
+        return;
     }
+
+    try {
+        const resp = await fetchAPI(endpoint, 'POST', data);
+        console.log('Resposta da API:', resp);
+        window.location.href = '/index.html';
+    } catch (error) {
+        console.error('Erro na chamada API:', error);
+        alert(`Erro ao agendar: ${error.message}`);
+        confirmarBtn.disabled = false;
+        confirmarBtn.textContent = 'CONFIRMAR';
+    }
+}
     // Event listeners
     confirmarBtn.addEventListener('click', confirmarAtendimento);
     

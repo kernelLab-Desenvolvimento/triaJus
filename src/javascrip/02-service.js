@@ -29,15 +29,15 @@ export function service() {
             setTimeout(() => {
                 switch (servicoValue) {
                     case "audiencia":
-                        window.location.href = '../html/03-infoReq.html';
+                        window.location.href = './03-infoReq.html';
                         break;
                     
                     case "consulta":
-                        window.location.href = '../html/04-impressao.html';
+                        window.location.href = './04-impressao.html';
                         break;
                     
                     case "servicoSocial":
-                        window.location.href = '../html/03-infoReq.html';
+                        window.location.href = './03-infoReq.html';
                         break
                     default:
                         break;

@@ -116,7 +116,7 @@ export function infoReq() {
             console.log(localStorage.getItem('servico'));
             console.log(localStorage.getItem('horario'));
             console.log(localStorage.getItem('req'));
-            window.location.href = '../html/04-impressao.html';
+            window.location.href = './04-impressao.html';
         }, 1500);
     });
 
