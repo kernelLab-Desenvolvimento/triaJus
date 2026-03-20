@@ -29,7 +29,6 @@ router.post('/audiencia', dbAcess, (req, res) => {
             req: requisito
         };
         
-        // Broadcast via WebSocket
         broadcastToTable('audiencia', {
             type: 'NEW_RECORD',
             table: 'audiencia',
@@ -113,31 +112,33 @@ router.post('/servicosocial', dbAcess, (req, res) => {
     });
 });
 
-// POST - Chamada
+// POST - Chamada ✅ agora salva horario e servico também
 router.post('/chamada', dbAcess, (req, res) => {
     const { db, broadcastToTable } = req;
-    const { ticket } = req.body;
-    
-    const sql = `INSERT INTO chamada (ticket) VALUES (?)`;
-    
-    db.run(sql, [ticket], function(err) {
+    const { ticket, horario, servico } = req.body; // ✅ extrai os 3 campos
+
+    const sql = `INSERT INTO chamada (ticket, horario, servico) VALUES (?, ?, ?)`;
+
+    db.run(sql, [ticket, horario, servico], function(err) {
         if (err) {
             return res.status(400).json({ error: err.message });
         }
-        
+
         const newRecord = {
             ID: this.lastID,
-            ticket
+            ticket,
+            horario, // ✅
+            servico  // ✅
         };
-        
+
         broadcastToTable('chamada', {
             type: 'NEW_RECORD',
             table: 'chamada',
             data: newRecord
         });
-        
-        res.json({ 
-            success: true, 
+
+        res.json({
+            success: true,
             message: 'Registro de chamada criado',
             data: newRecord
         });

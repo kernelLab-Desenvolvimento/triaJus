@@ -3,7 +3,8 @@ import { showError } from '/src/javascrip/config.js';
 class ChamadaAtual {
     constructor() {
         this.ws = null;
-        this.ultimaChamada = null;
+        // Histórico das últimas 3 chamadas — índice 0 = mais recente
+        this.historico = [null, null, null];
         this.init();
     }
 
@@ -20,7 +21,6 @@ class ChamadaAtual {
 
         this.ws.onopen = () => {
             console.log('✅ WebSocket conectado para chamadas');
-            // Informa ao servidor que queremos escutar a tabela de chamada
             this.ws.send(JSON.stringify({ type: 'chamada' }));
         };
 
@@ -30,7 +30,7 @@ class ChamadaAtual {
                 console.log('📨 Mensagem WebSocket - Chamada:', data);
                 
                 if (data.type === 'NEW_RECORD' && data.table === 'chamada') {
-                    this.atualizarChamadaAtual(data.data);
+                    this.adicionarChamada(data.data);
                 }
             } catch (error) {
                 console.error('❌ Erro ao processar mensagem WebSocket:', error);
@@ -39,7 +39,6 @@ class ChamadaAtual {
 
         this.ws.onclose = () => {
             console.log('🔴 WebSocket desconectado');
-            // Tenta reconectar após 3 segundos
             setTimeout(() => this.configurarWebSocket(), 3000);
         };
 
@@ -48,140 +47,96 @@ class ChamadaAtual {
         };
     }
 
+    adicionarChamada(dadosChamada) {
+        this.historico = [dadosChamada, this.historico[0], this.historico[1]];
+        console.log('✅ Histórico atualizado:', this.historico);
+        this.atualizarTodosDisplays();
+    }
+
+    atualizarTodosDisplays() {
+        this.atualizarDisplay(
+            '.conteudo-principal .senha-numero',
+            '.conteudo-principal .servico-container',
+            '.conteudo-principal .horario-container .sessao-span',
+            this.historico[0]
+        );
+
+        this.atualizarDisplay(
+            '.conteudo-principal-1 .senha-numero-1',
+            '.conteudo-principal-1 .servico-container',
+            '.conteudo-principal-1 .horario-container-1 .sessao-span',
+            this.historico[1]
+        );
+
+        this.atualizarDisplay(
+            '.conteudo-principal-2 .senha-numero-2',
+            '.conteudo-principal-2 .servico-container',
+            '.conteudo-principal-2 .horario-container-2 .sessao-span',
+            this.historico[2]
+        );
+    }
+
+    // ✅ Método único — verifica !dados ANTES de acessar qualquer propriedade
+    atualizarDisplay(seletorNumero, seletorServico, seletorHorario, dados) {
+        const numeroEl  = document.querySelector(seletorNumero);
+        const servicoEl = document.querySelector(seletorServico);
+        const horarioEl = document.querySelector(seletorHorario);
+
+        if (!dados) {
+            if (numeroEl)  numeroEl.textContent  = '---';
+            if (servicoEl) servicoEl.textContent = '-';
+            if (horarioEl) horarioEl.textContent = '-';
+            return;
+        }
+
+        if (numeroEl)  numeroEl.textContent  = dados.ticket || '000';
+        if (servicoEl) servicoEl.textContent = this.obterTipoServico(dados.servico);
+        if (horarioEl) horarioEl.textContent = dados.horario || '-';
+    }
+
+    obterTipoServico(tipo) {
+        const tipos = {
+            'audiencia':     'Audiência',
+            'consulta':      'Consulta',
+            'servicoSocial': 'Serviço Social',
+        };
+        return tipos[tipo] || 'Atendimento';
+    }
+
     configurarEventListeners() {
-        // Atualiza data e hora a cada segundo
         setInterval(() => this.atualizarDataHora(), 1000);
         this.atualizarDataHora();
     }
 
-    atualizarChamadaAtual(dadosChamada) {
-        this.ultimaChamada = dadosChamada;
-        
-        // Atualiza os três displays
-        this.atualizarDisplayPrincipal(dadosChamada);
-        this.atualizarDisplaySecundario1(dadosChamada);
-        this.atualizarDisplaySecundario2(dadosChamada);
-        
-        console.log('✅ Chamada atualizada:', dadosChamada);
-    }
-
-    atualizarDisplayPrincipal(dados) {
-        // Display principal (section do meio)
-        const numeroSequencial = document.querySelector('.conteudo-principal .senha-numero');
-        const servicoDisplay = document.querySelector('.conteudo-principal .servico-container');
-        const horarioSpan = document.querySelector('.conteudo-principal .horario-container span');
-        
-        if (numeroSequencial) {
-            numeroSequencial.textContent = dados.ticket || '000';
-        }
-        
-        if (servicoDisplay) {
-            // Aqui você pode mapear o tipo de serviço se necessário
-            servicoDisplay.textContent = this.obterTipoServico(dados.tipo);
-        }
-        
-        if (horarioSpan && dados.horario) {
-            horarioSpan.textContent = dados.horario;
-        }
-    }
-
-    atualizarDisplaySecundario1(dados) {
-        // Primeiro display secundário (section-1 primeiro)
-        const numeroSequencial = document.querySelector('.conteudo-principal-1 .senha-numero-1');
-        const servicoDisplay = document.querySelector('.conteudo-principal-1 .servico-container');
-        const horarioSpan = document.querySelector('.conteudo-principal-1 .horario-container-1 span');
-        
-        if (numeroSequencial) {
-            numeroSequencial.textContent = dados.ticket || '000';
-        }
-        
-        if (servicoDisplay) {
-            servicoDisplay.textContent = this.obterTipoServico(dados.tipo);
-        }
-        
-        if (horarioSpan && dados.horario) {
-            horarioSpan.textContent = dados.horario;
-        }
-    }
-
-    atualizarDisplaySecundario2(dados) {
-        // Segundo display secundário (section-1 segundo)
-        const numeroSequencial = document.querySelector('.conteudo-principal-2 .senha-numero-2');
-        const servicoDisplay = document.querySelector('.conteudo-principal-2 .servico-container');
-        const horarioSpan = document.querySelector('.conteudo-principal-2 .horario-container-2 span');
-        
-        if (numeroSequencial) {
-            numeroSequencial.textContent = dados.ticket || '000';
-        }
-        
-        if (servicoDisplay) {
-            servicoDisplay.textContent = this.obterTipoServico(dados.tipo);
-        }
-        
-        if (horarioSpan && dados.horario) {
-            horarioSpan.textContent = dados.horario;
-        }
-    }
-
-    obterTipoServico(tipo) {
-        // Mapeia o tipo para um nome mais amigável
-        const tipos = {
-            'audiencia': 'Audiência',
-            'consulta': 'Consulta',
-            'social': 'Serviço Social',
-            'defensoria': 'Defensoria Pública'
-        };
-        
-        return tipos[tipo] || 'Atendimento';
-    }
-
     atualizarDataHora() {
         const now = new Date();
-        
-        // Formata a data
         const dataFormatada = now.toLocaleDateString('pt-BR');
-        
-        // Formata a hora
         const horaFormatada = now.toLocaleTimeString('pt-BR');
-        
-        // Atualiza todos os elementos de data e hora
+
         const elementosData = document.querySelectorAll('.data-class, .data-class-1, .data-class-2');
         const elementosHora = document.querySelectorAll('.hora-class, .hora-class-1, .hora-class-2');
-        
-        elementosData.forEach(elemento => {
-            const span = elemento.querySelector('span');
+
+        elementosData.forEach(el => {
+            const span = el.querySelector('span');
             if (span) span.textContent = dataFormatada;
         });
-        
-        elementosHora.forEach(elemento => {
-            const span = elemento.querySelector('span');
+
+        elementosHora.forEach(el => {
+            const span = el.querySelector('span');
             if (span) span.textContent = horaFormatada;
         });
-        
-        // Atualiza também o header
+
         const dataHeader = document.getElementById('data');
         const horaHeader = document.getElementById('hora');
-        
         if (dataHeader) dataHeader.textContent = dataFormatada;
         if (horaHeader) horaHeader.textContent = horaFormatada;
     }
 
-    // Método para forçar uma atualização manual (se necessário)
-    forcarAtualizacao() {
-        if (this.ultimaChamada) {
-            this.atualizarChamadaAtual(this.ultimaChamada);
-        }
-    }
-
-    // Método para fechar conexão quando necessário
     destroy() {
-        if (this.ws) {
-            this.ws.close();
-        }
+        if (this.ws) this.ws.close();
     }
 }
 
-// Inicializa a aplicação quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
     window.chamadaAtual = new ChamadaAtual();
 });

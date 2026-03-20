@@ -47,6 +47,8 @@ function initializeDatabase() {
         db.run(`CREATE TABLE IF NOT EXISTS chamada (
             ID INTEGER PRIMARY KEY AUTOINCREMENT,
             ticket TEXT NOT NULL,
+            horario TEXT NOT NULL,
+            servico TEXT NOT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`);
     });

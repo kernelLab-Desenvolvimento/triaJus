@@ -24,7 +24,6 @@ class FilaAtendimento {
 
         this.ws.onopen = () => {
             console.log('✅ WebSocket conectado');
-            // Informa ao servidor que queremos escutar a tabela de audiência
             this.ws.send(JSON.stringify({ type: this.sec }));
         };
 
@@ -43,7 +42,6 @@ class FilaAtendimento {
 
         this.ws.onclose = () => {
             console.log('🔴 WebSocket desconectado');
-            // Tenta reconectar após 3 segundos
             setTimeout(() => this.configurarWebSocket(), 3000);
         };
 
@@ -53,20 +51,17 @@ class FilaAtendimento {
     }
 
     configurarEventListeners() {
-        // Evento do select de sessão
         const selectSessao = document.querySelector('.selecionar-interno');
         selectSessao.addEventListener('change', (e) => {
             this.sessaoSelecionada = e.target.value;
             this.filtrarPorSessao();
         });
 
-        // Evento do botão confirmar
         const btnConfirmar = document.getElementById('select');
         btnConfirmar.addEventListener('click', () => {
             this.filtrarPorSessao();
         });
 
-        // Evento do botão chamar
         const btnChamar = document.getElementById('chamar');
         btnChamar.addEventListener('click', () => {
             this.chamarProximo();
@@ -75,7 +70,6 @@ class FilaAtendimento {
 
     async carregarDadosIniciais() {
         try {
-            
             const response = await fetch(`${API_BASE_URL}/${this.sec}`);
             const result = await response.json();
             
@@ -90,37 +84,31 @@ class FilaAtendimento {
     }
 
     adicionarNaFila(novoRegistro) {
-        // Verifica se o registro já existe na fila
         const existe = this.dadosFila.some(item => item.ID === novoRegistro.ID);
         
         if (!existe) {
-            this.dadosFila.unshift(novoRegistro); // Adiciona no início
+            this.dadosFila.unshift(novoRegistro);
             this.filtrarPorSessao();
         }
     }
 
     filtrarPorSessao() {
-        // Obtém a section do localStorage
         const sec = localStorage.getItem('section');
         
-        // Filtra os dados pela sessão selecionada apenas se não for "consulta"
         let dadosFiltrados = null;
         if (sec !== "consulta") {
             dadosFiltrados = this.dadosFila.filter(item => 
                 item.horario === this.sessaoSelecionada
             );
         } else {
-            dadosFiltrados = this.dadosFila; // Mostra todos os dados sem filtro
+            dadosFiltrados = this.dadosFila;
         }
 
-        // Limita a 6 registros (número de linhas na tabela)
         const dadosParaExibir = dadosFiltrados.slice(0, 6);
-        
         this.atualizarTabela(dadosParaExibir);
     }
 
     atualizarTabela(dados) {
-        // Limpa a tabela
         for (let i = 0; i < 6; i++) {
             document.getElementById(`nome${i}`).textContent = '-';
             document.getElementById(`intima${i}`).textContent = '-';
@@ -128,9 +116,8 @@ class FilaAtendimento {
             document.getElementById(`sessao${i}`).textContent = '-';
         }
 
-        // Preenche com os dados
         dados.forEach((item, index) => {
-            document.getElementById(`nome${index}`).textContent = '-'; // Como solicitado
+            document.getElementById(`nome${index}`).textContent = '-';
             document.getElementById(`intima${index}`).textContent = item.req || '-';
             document.getElementById(`cpf${index}`).textContent = this.formatarCPF(item.CPF);
             document.getElementById(`sessao${index}`).textContent = item.horario || '-';
@@ -143,37 +130,36 @@ class FilaAtendimento {
             return;
         }
 
-        // Pega o primeiro da fila para a sessão atual
         const proximo = this.dadosFila.find(item => 
             item.horario === this.sessaoSelecionada
         );
 
         if (proximo) {
+            // ✅ Registra ANTES de remover da fila (passa objeto completo)
+            this.registrarChamada(proximo);
+
             // Remove da fila local
             this.dadosFila = this.dadosFila.filter(item => item.ID !== proximo.ID);
-            
-            // Atualiza a tabela
             this.filtrarPorSessao();
-            
-            // Registra a chamada na API
-            this.registrarChamada(proximo.ticket);
-            
+
             showError(`Chamando: ${proximo.ticket}`);
         } else {
             showError('Não há mais pessoas nesta sessão');
         }
     }
 
-    async registrarChamada(ticket) {
+    // ✅ Recebe objeto completo com ticket, horario e servico
+    async registrarChamada(registro) {
         try {
             const response = await fetch(`${API_BASE_URL}/chamada`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ ticket })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ticket:  registro.ticket,
+                    horario: registro.horario || '',
+                    servico: registro.servico || ''
+                })
             });
-            
             const result = await response.json();
             console.log('✅ Chamada registrada:', result);
         } catch (error) {
@@ -183,14 +169,10 @@ class FilaAtendimento {
 
     formatarCPF(cpf) {
         if (!cpf) return '-';
-        // Remove caracteres não numéricos
         cpf = cpf.replace(/\D/g, '');
-        
-        // Aplica a formatação
         return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
     }
 
-    // Método para fechar conexão quando necessário
     destroy() {
         if (this.ws) {
             this.ws.close();
@@ -198,8 +180,6 @@ class FilaAtendimento {
     }
 }
 
-// Inicializa a aplicação quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
     window.filaAtendimento = new FilaAtendimento();
 });
-
