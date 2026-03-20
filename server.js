@@ -50,5 +50,9 @@ app.listen(PORT, () => {
     });
     console.log(`📍 Local: http://localhost:${PORT}`);
     console.log(`📁 Diretório do servidor: ${__dirname}`);
+    console.log('=====Rotas Principais=====')
+    console.log(`Tela de Operação:  http://localhost:${PORT}/entrada`);
+    console.log(`Painel de Chamadas:  http://localhost:${PORT}/painel-de-chamada`);
+    console.log(`Tela de Cadastro:  http://localhost:${PORT}`);
     console.log('==========================');
 });
