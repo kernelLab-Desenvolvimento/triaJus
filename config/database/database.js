@@ -21,7 +21,7 @@ function initializeDatabase() {
             servico TEXT NOT NULL,
             horario TEXT NOT NULL,
             req TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            created_at DATETIME DEFAULT (datetime('now', '-3 hours'))
         )`);
 
         // Tabela consulta
@@ -30,7 +30,7 @@ function initializeDatabase() {
             ticket TEXT NOT NULL,
             CPF TEXT NOT NULL,
             servico TEXT NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            created_at DATETIME DEFAULT (datetime('now', '-3 hours'))
         )`);
 
         // Tabela servicoSocial
@@ -40,7 +40,7 @@ function initializeDatabase() {
             CPF TEXT NOT NULL,
             servico TEXT NOT NULL,
             horario TEXT NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            created_at DATETIME DEFAULT (datetime('now', '-3 hours'))
         )`);
 
         // Tabela chamada
@@ -49,7 +49,7 @@ function initializeDatabase() {
             ticket TEXT NOT NULL,
             horario TEXT NOT NULL,
             servico TEXT NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            created_at DATETIME DEFAULT (datetime('now', '-3 hours'))
         )`);
     });
 }

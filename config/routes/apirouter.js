@@ -155,7 +155,9 @@ router.get('/:table', dbAcess, (req, res) => {
         return res.status(404).json({ error: 'Tabela não encontrada' });
     }
     
-    const sql = `SELECT * FROM ${table} ORDER BY created_at DESC`;
+    const sql = `SELECT * FROM ${table} 
+                 WHERE DATE(created_at) = DATE('now', '-3 hours') 
+                 ORDER BY created_at DESC`;
     
     db.all(sql, [], (err, rows) => {
         if (err) {
