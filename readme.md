@@ -5,8 +5,7 @@
   ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
   ![License](https://img.shields.io/badge/license-MIT-green.svg)
   ![Node](https://img.shields.io/badge/node-18.x-brightgreen.svg)
-  ![PostgreSQL](https://img.shields.io/badge/postgresql-15.x-blue.svg)
-  ![React](https://img.shields.io/badge/react-18.x-61dafb.svg)
+  ![SQLite](https://img.shields.io/badge/SQLite-15.x-blue.svg)
   
   <h3>Sistema de autoatendimento e gerenciamento de filas voltado para o Poder Judiciário</h3>
   
@@ -186,16 +185,26 @@ Eventos emitidos pelo painel operacional (`/entrada`) são repassados ao servido
 
 ## 👥 Autores
 
-- **Lucas Gonçalves** - *Desenvolvimento* - @lucasitron
-- **Eduardo** - *Colaborador*
-- **KLH - Desenvolvimento** - *Organização*
+- **Eduardo** - *Backend*
+- **Henrique** - redes
+- **Kleber Peres** - Frontend
+- **Lucas Gonçalves** - *Product maneger* - @lucasitron
+- **FabLab camtuc** - *Organização*
 
 ---
 
 ## 📞 Contato
 
-- **LinkedIn**: Lucas Gonçalves
-- **GitHub**: @lucasitron
+- **LinkedIn**:
+  - Lucas Gonçalves
+  - Kleber
+  - Eduardo 
+  - Henrique
+- **GitHub**:
+  - @lucasitron
+  - Kleber
+  - eduardo
+  - Henrique
 
 ---
 
