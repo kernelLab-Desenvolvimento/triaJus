@@ -1,0 +1,466 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-de-fundo: #2d308e;
+    --central-color: #f0f0f0;
+    --central-senha: #fafafa;
+    --forum-color: #2226a8;
+    --text-color: #d9d9d9;
+    --text-p-h2: #FFFFFF;
+    --text-h1: #000000;
+    --paragrafo: #004aad;
+}
+
+body{
+    display: block;
+}
+main{
+    display: flex;
+}
+
+h1{
+    font-size: 50px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+
+.coteiner-header {
+    display: flex;
+    gap: 150px;
+    background-color: var(--color-de-fundo);
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+header h1 {
+    text-align: end;
+    font-size: 19px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-p-h2);
+}
+
+.data-hora {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    color: var(--central-color);
+}
+
+.sacao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+
+
+.img-fo {
+
+    left: 30px;
+    height: 80px;
+
+
+}
+/* ==================== TELA 04 - IMPRESSÃO ================== */
+
+.color-h1{
+    color: #004aad;
+}
+.section-1{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.container-section{
+    display: flex;
+    margin: auto;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+}
+.main_gerador-1,.main_gerador-2 {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--central-senha);
+    border: 3px solid var(--forum-color);
+    width: 550px; /* Mais largo para melhor visibilidade */
+    max-height: 310px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* -------------------- CABEÇALHO -------------------- */
+.cabecalho-comprovante-1,.cabecalho-comprovante-2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--forum-color);
+    color: var(--text-p-h2);
+    padding: 10px 20px;
+    border-bottom: 3px solid var(--color-buton);
+}
+
+.cabecalho-esquerda-1,.cabecalho-esquerda-2 {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cabecalho-logo-1, .cabecalho-logo-2{
+    width: 50px;
+    height: 50px;
+}
+
+.cabecalho-titulo-1,.cabecalho-titulo-2 {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* -------------------- DATA E HORA -------------------- */
+.elementos-data-1,.elementos-data-2{
+    padding: 7px;
+}
+.data-hora-container-1,.data-hora-container-2{
+    display: flex;
+    gap: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 2px solid var(--forum-color);
+    
+}
+
+.data-class-1, .hora-class-1,.data-class-2, .hora-class-2{
+    font-weight: bold;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-h1);
+    margin: 0;
+}
+
+.data-class-1 strong, .hora-class-1 strong,.data-class-2 strong, .hora-class-2 strong {
+    color: var(--forum-color);
+    min-width: 50px;
+}
+
+/* -------------------- CONTEÚDO PRINCIPAL -------------------- */
+.conteudo-principal-1,.conteudo-principal-2  {
+    padding: 7px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* CPF */
+.cpf-container-1,.cpf-container-2 {
+    text-align: center;
+    padding: 10px;
+    background-color: #f0f8ff;
+    border-radius: 6px;
+    border-left: 4px solid var(--forum-color);
+    margin: 0;
+}
+
+.cpf-1,.cpf-2 {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--forum-color);
+    margin: 0;
+}
+
+/* SENHA E SERVIÇO */
+.elemento-servico-1,.elemento-servico-2{
+    padding: 7px;
+}
+.senha-servico-container-1,.senha-servico-container-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--forum-color), var(--color-buton));
+    border-radius: 10px;
+    color: var(--text-p-h2);
+    text-align: center;
+}
+
+.senha-numero-1,.senha-numero-2 {
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 1;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.servico-container-1,.servico-container-2 {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+/* HORÁRIO (apenas para audiência e serviço social) */
+.horario-container-1,.horario-container-2 {
+    text-align: center;
+    padding: 14px;
+    background-color: var(--color-buton);
+    color: var(--text-p-h2);
+    border-radius: 8px;
+    margin: 0;
+}
+
+.horario-container-1 strong ,.horario-container-2 strong {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 10px;
+}
+
+.horario-container span {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ============== linha =================== */
+.linha{
+    width: 5px;
+    background-color: var(--paragrafo);
+}
+
+/*======================= section-02================*/
+section{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-content: center;
+    gap: 30px;
+    padding: 10px;
+
+}
+
+.container-imp {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 10px;
+    
+} 
+
+.main_gerador {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--central-senha);
+    border: 3px solid var(--forum-color);
+    width: 700px; /* Mais largo para melhor visibilidade */
+    min-height: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* -------------------- CABEÇALHO -------------------- */
+.cabecalho-comprovante {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--forum-color);
+    color: var(--text-p-h2);
+    padding: 20px 30px;
+    border-bottom: 3px solid var(--color-buton);
+}
+
+.cabecalho-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cabecalho-logo {
+    width: 60px;
+    height: 60px;
+}
+
+.cabecalho-titulo {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* -------------------- DATA E HORA -------------------- */
+.elementos-data{
+    padding: 10px;
+}
+.data-hora-container {
+    display: flex;
+    gap: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: 2px solid var(--forum-color);
+    
+}
+
+.data-class, .hora-class {
+    font-weight: bold;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-h1);
+    margin: 0;
+}
+
+.data-class strong, .hora-class strong {
+    color: var(--forum-color);
+    min-width: 50px;
+}
+
+/* -------------------- CONTEÚDO PRINCIPAL -------------------- */
+.conteudo-principal {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* CPF */
+.cpf-container {
+    text-align: center;
+    padding: 15px;
+    background-color: #f0f8ff;
+    border-radius: 6px;
+    border-left: 4px solid var(--forum-color);
+    margin: 0;
+}
+
+.cpf {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--forum-color);
+    margin: 0;
+}
+
+/* SENHA E SERVIÇO */
+.elemento-servico{
+    padding: 15px;
+}
+.senha-servico-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    background: linear-gradient(135deg, var(--forum-color), var(--color-buton));
+    border-radius: 10px;
+    color: var(--text-p-h2);
+    text-align: center;
+}
+
+.senha-numero {
+    font-size: 96px;
+    font-weight: bold;
+    line-height: 1;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.servico-container {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+/* HORÁRIO (apenas para audiência e serviço social) */
+.horario-container {
+    text-align: center;
+    padding: 18px;
+    background-color: var(--color-buton);
+    color: var(--text-p-h2);
+    border-radius: 8px;
+    margin: 0;
+}
+
+.horario-container strong {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 10px;
+}
+
+.horario-container span {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* -------------------- OTIMIZAÇÃO PARA IMPRESSÃO -------------------- */
+@media print {
+    .main_gerador {
+        box-shadow: none;
+        border: 3px solid #000;
+        width: 100%;
+        min-height: auto;
+    }
+    
+    .btn_ajuste_gerador {
+        display: none;
+    }
+}
+
+/* -------------------- RESPONSIVIDADE -------------------- */
+@media (max-width: 900px) {
+    .main_gerador {
+        width: 95%;
+        min-height: auto;
+    }
+    
+    .cabecalho-comprovante {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .data-hora-container {
+        flex-direction: column;
+        gap: 10px;
+        margin: 15px;
+    }
+    
+    .senha-numero {
+        font-size: 72px;
+    }
+    
+    .btn_ajuste_gerador {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .btn_gerador {
+        width: 200px;
+    }
+}
+
+.drop {
+    display: none;
+}
