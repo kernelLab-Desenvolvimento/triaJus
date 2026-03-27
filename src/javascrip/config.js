@@ -7,7 +7,7 @@ export const API_BASE_URL = `http://${getSimpleIP()}:3001/api`;
 console.log(getSimpleIP);
 
 // ✅ NOVO: Configuração WebSocket
-export const WEBSOCKET_URL = `ws://${getSimpleIP()}:8080`;
+export const WEBSOCKET_URL = `ws://${getSimpleIP()}:1234`;
 
 /*funções para data e hora */
 export function dataAtual() {

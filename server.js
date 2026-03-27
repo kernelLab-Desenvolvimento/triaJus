@@ -41,7 +41,7 @@ app.listen(PORT, () => {
     
     console.log('=== SERVIDOR INICIADO ===');
     console.log(`📡 Servidor rodando na porta: ${PORT}`);
-    console.log(`🌐 WebSocket rodando na porta: 8080`);
+    console.log(`🌐 WebSocket rodando na porta: 1234`);
     console.log(`🖥️  IPs disponíveis:`);
     addresses.forEach(ip => {
         console.log(`   → http://${ip}:${PORT}`);

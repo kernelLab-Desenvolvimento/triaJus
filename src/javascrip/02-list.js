@@ -18,7 +18,7 @@ class FilaAtendimento {
     configurarWebSocket() {
         console.log("section: ", this.sec);
         const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const wsUrl = `${wsProtocol}//${window.location.hostname}:8080`;
+        const wsUrl = `${wsProtocol}//${window.location.hostname}:1234`;
         
         this.ws = new WebSocket(wsUrl);
 
