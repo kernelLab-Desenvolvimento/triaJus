@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/img/forum.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <title>Fórum - Painel ADM</title>
+</head>
+<body class="adm-page adm-dashboard">
+    <header class="adm-header">
+        <div class="adm-header-content">
+            <img src="../../assets/img/forum.png" alt="Logo do Fórum">
+            <h1>SISTEMA DE ATENDIMENTO</h1>
+        </div>
+    </header>
+    <main class="adm-main">
+        <section class="dashboard-layout">
+            <div class="dashboard-card">
+                <div class="chart">
+                    <div class="days">
+                        <span>Segunda</span><span>Terça</span><span>Quarta</span><span>Quinta</span><span>Sexta</span>
+                    </div>
+                    <div class="bars">
+                        <div class="column"><div class="bar" style="height: 18px;"></div><span>---</span></div>
+                        <div class="column"><div class="bar" style="height: 18px;"></div><span>---</span></div>
+                        <div class="column"><div class="bar" style="height: 18px;"></div><span>---</span></div>
+                        <div class="column"><div class="bar" style="height: 18px;"></div><span>---</span></div>
+                        <div class="column"><div class="bar" style="height: 18px;"></div><span>---</span></div>
+                    </div>
+                </div>
+                <div class="dashboard-image">
+                    <img src="../../assets/img/forum.png" alt="Imagem do Fórum">
+                </div>
+            </div>
+            <div class="dashboard-actions">
+                <button class="primary-btn" id="btn-inicio"><i class="bi bi-file-check-fill"></i> INÍCIO</button>
+                <button class="danger-btn" id="btn-encerramento"><i class="bi bi-file-x-fill"></i> ENCERRAMENTO</button>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="/src/javascrip/admin/02-listAt.js"></script>
+</body>
+</html>

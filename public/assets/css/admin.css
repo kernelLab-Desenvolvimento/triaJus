@@ -1,0 +1,336 @@
+:root {
+    --adm-primary: #004aad;
+    --adm-primary-dark: #172a7a;
+    --adm-surface: #f2f4f7;
+    --adm-card: #ffffff;
+    --adm-text: #1a202c;
+    --adm-muted: #718096;
+    --adm-danger: #e21b1b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+}
+
+body.adm-page {
+    min-height: 100vh;
+    background-color: var(--adm-surface);
+    color: var(--adm-text);
+}
+
+.adm-header {
+    background-color: var(--adm-primary);
+    padding: 18px 24px;
+}
+
+.adm-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+}
+
+.adm-header-content img {
+    height: 72px;
+}
+
+.adm-header-content h1 {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.header-icon {
+    font-size: 3rem;
+}
+
+.adm-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+.primary-btn,
+.secondary-btn,
+.danger-btn {
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 14px 20px;
+    cursor: pointer;
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.primary-btn,
+.secondary-btn {
+    background-color: var(--adm-primary);
+}
+
+.danger-btn {
+    background-color: var(--adm-danger);
+}
+
+.primary-btn:hover,
+.secondary-btn:hover,
+.danger-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Tela 01 */
+.adm-login .adm-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 140px);
+}
+
+.login-card {
+    width: min(100%, 420px);
+    background-color: var(--adm-card);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.login-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.login-title i {
+    font-size: 2rem;
+    color: #2e7d32;
+}
+
+#admin-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#admin-login-form label {
+    color: var(--adm-muted);
+    font-weight: 600;
+}
+
+#admin-login-form input {
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px;
+    outline: none;
+}
+
+/* Tela 02 */
+.dashboard-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.dashboard-card {
+    background-color: var(--adm-card);
+    border: 10px solid var(--adm-primary-dark);
+    border-radius: 12px;
+    padding: 20px;
+    width: min(100%, 720px);
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.chart {
+    flex: 1;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    padding: 14px;
+}
+
+.days,
+.bars {
+    display: flex;
+    justify-content: space-around;
+}
+
+.days {
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.bars {
+    align-items: flex-end;
+    height: 180px;
+    border-bottom: 1px solid #cbd5e0;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.bar {
+    width: 30px;
+    background-color: var(--adm-primary-dark);
+    border-radius: 8px 8px 0 0;
+}
+
+.dashboard-image img {
+    height: 170px;
+    opacity: 0.55;
+}
+
+.dashboard-actions {
+    width: min(100%, 320px);
+    background-color: #e6eaef;
+    border: 4px solid var(--adm-primary-dark);
+    border-radius: 12px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Tela 03 */
+.control-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.operation-tabs {
+    background-color: #d8e1e1;
+    border-radius: 16px;
+    padding: 10px;
+}
+
+.operation-tabs ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.tab {
+    position: relative;
+    cursor: pointer;
+    font-weight: 700;
+    border-radius: 12px;
+    padding: 12px 22px;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.tab.active,
+.tab:hover {
+    background-color: #fff;
+}
+
+.badge {
+    background-color: var(--adm-danger);
+    color: #fff;
+    border-radius: 999px;
+    min-width: 20px;
+    text-align: center;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    display: none;
+}
+
+.table-and-session {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 20px;
+}
+
+.table-card,
+.session-card {
+    background-color: #d8e1e1;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.table-card h2,
+.session-card h2 {
+    background: linear-gradient(90deg, #4c46f5, #2f52ff);
+    color: #fff;
+    text-align: center;
+    padding: 14px;
+    font-size: 1.4rem;
+}
+
+.table-scroll {
+    max-height: 400px;
+    overflow: auto;
+    padding: 12px;
+}
+
+.fila-atendimento {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+.fila-atendimento th,
+.fila-atendimento td {
+    border: 1px solid #94a3b8;
+    padding: 14px;
+    text-align: center;
+}
+
+.fila-atendimento th {
+    background-color: #f1f5f9;
+    position: sticky;
+    top: 0;
+}
+
+.session-card {
+    padding-bottom: 14px;
+}
+
+.selecionar-interno {
+    width: calc(100% - 20px);
+    margin: 14px 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #94a3b8;
+    font-weight: 600;
+}
+
+.session-card.hidden {
+    display: none;
+}
+
+.control-actions {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+@media (max-width: 900px) {
+    .adm-header-content h1 {
+        font-size: 1.35rem;
+    }
+
+    .table-and-session {
+        grid-template-columns: 1fr;
+    }
+}

@@ -10,19 +10,17 @@ const PORT = 3001;
 
 
 app.use(express.json());
-app.use(cors()); 
+app.use(cors());
+
+// Rotas nomeadas antes do static: evita que pastas em public/ (ex.: /entrada) interceptem antes do sendFile
+const usersRoutes = require('./config/routes/usersrouter');
+const apiRoutes = require('./config/routes/apirouter.js');
+app.use('/', usersRoutes);
+app.use('/api', apiRoutes);
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/src', express.static(path.join(__dirname, 'src')));
 app.use('/config', express.static(path.join(__dirname, 'config')));
-
-
-
-//Importa Rotas
-const usersRoutes = require('./config/routes/usersrouter');
-const apiRoutes = require('./config/routes/apirouter.js');
-// Rotas
-app.use('/', usersRoutes);
-app.use('/api', apiRoutes);
 
 
 

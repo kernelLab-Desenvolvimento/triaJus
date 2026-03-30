@@ -29,7 +29,7 @@ export function authAt() {
                 
                 // Redireciona após 500ms
                 setTimeout(() => {
-                    window.location.href = '/admin/02-list.html';
+                    window.location.href = '/admin/02-listAt.html';
                 }, 500);
             }
         });

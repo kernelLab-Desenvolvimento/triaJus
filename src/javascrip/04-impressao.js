@@ -108,7 +108,7 @@ export function impressao() {
     try {
         const resp = await fetchAPI(endpoint, 'POST', data);
         console.log('Resposta da API:', resp);
-        window.location.href = '/index.html';
+        window.location.href = '/';
     } catch (error) {
         console.error('Erro na chamada API:', error);
         alert(`Erro ao agendar: ${error.message}`);

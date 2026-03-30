@@ -1,0 +1,58 @@
+/* Página inicial (portal) — alinhada ao tema index.css (barra lateral + área principal) */
+
+.portal-home {
+    max-width: 720px;
+}
+
+.portal-home .txt p strong {
+    color: #fff;
+}
+
+.portal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+/* Links como botões, no estilo .btn-T1 do index.css */
+.portal-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--central-color);
+    background-color: var(--color-buton);
+    border: none;
+    outline: none;
+    padding: 15px 22px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 160px;
+    cursor: pointer;
+    transition: 0.3s all;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.portal-link:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+    transform: translateY(-2px);
+    background-color: #3a3da0;
+    border-bottom: none;
+}
+
+.portal-link i {
+    font-size: 22px;
+    color: var(--text-p-h2);
+}
+
+@media (max-width: 768px) {
+    .portal-link {
+        width: 100%;
+        min-width: unset;
+    }
+}
