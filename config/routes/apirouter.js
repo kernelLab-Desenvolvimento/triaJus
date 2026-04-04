@@ -168,4 +168,25 @@ router.get('/:table', dbAcess, (req, res) => {
 });
 
 
+// POST - Wipe Database
+router.post('/wipe', dbAcess, (req, res) => {
+    const { email, password } = req.body;
+    
+    // Verificação de sudo
+    if (email === 'dev' && password === 'dev') {
+        const { db } = req;
+        db.serialize(() => {
+            db.run('DELETE FROM audiencia');
+            db.run('DELETE FROM consulta');
+            db.run('DELETE FROM servicoSocial');
+            db.run('DELETE FROM chamada', (err) => {
+                if (err) return res.status(500).json({ error: err.message });
+                res.json({ success: true, message: 'Banco de dados zerado com sucesso.' });
+            });
+        });
+    } else {
+        res.status(401).json({ error: 'Acesso Sudo Negado. Credenciais inválidas.' });
+    }
+});
+
 module.exports = router;

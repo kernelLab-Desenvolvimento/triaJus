@@ -39,7 +39,68 @@
             </div>
             <div class="dashboard-actions">
                 <button class="primary-btn" id="btn-inicio"><i class="bi bi-file-check-fill"></i> INÍCIO</button>
+                <button class="primary-btn" id="btn-chamada"><i class="bi bi-telephone-fill"></i> TELA DE CHAMADA</button>
+                <button class="primary-btn" id="btn-entrada"><i class="bi bi-box-arrow-in-right"></i> TELA DE ENTRADA</button>
                 <button class="danger-btn" id="btn-encerramento"><i class="bi bi-file-x-fill"></i> ENCERRAMENTO</button>
+            </div>
+        </section>
+
+        <!-- Formulário de Cadastro de Usuário (Aprovado via Sudo) -->
+        <section class="dashboard-layout" style="margin-top: 30px;">
+            <div class="dashboard-card" style="width: 100%;">
+                <h2 style="color: var(--color-buton); margin-bottom: 20px;"><i class="bi bi-person-plus-fill"></i> Cadastro de Usuário</h2>
+                <form id="cadastro-usuario-form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="display: flex; flex-direction: column;">
+                        <label for="cad-nome" style="font-weight: bold; margin-bottom: 5px;">Nome Completo</label>
+                        <input id="cad-nome" type="text" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <label for="cad-cpf" style="font-weight: bold; margin-bottom: 5px;">CPF</label>
+                        <input id="cad-cpf" type="text" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <label for="cad-matricula" style="font-weight: bold; margin-bottom: 5px;">Matrícula</label>
+                        <input id="cad-matricula" type="text" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <label for="cad-senha" style="font-weight: bold; margin-bottom: 5px;">Senha do Usuário</label>
+                        <input id="cad-senha" type="password" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    </div>
+                    
+                    <div style="grid-column: span 2; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                        <h4 style="color: var(--color-buton); margin-bottom: 10px;"><i class="bi bi-diagram-3-fill"></i> Setores Habilitados</h4>
+                        <div style="display: flex; gap: 20px;">
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" class="cad-setor-checkbox" value="Audiência"> Audiência
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" class="cad-setor-checkbox" value="Consulta"> Consulta
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" class="cad-setor-checkbox" value="Serviço Social"> Serviço Social
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" class="cad-setor-checkbox" value="*"> Todos (Admin)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div style="grid-column: span 2; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                        <h4 style="color: #d9534f; margin-bottom: 10px;"><i class="bi bi-shield-lock-fill"></i> Autorização Sudo (Obrigatória)</h4>
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <label for="cad-sudo-email" style="font-weight: bold; margin-bottom: 5px;">E-mail do Admin</label>
+                        <input id="cad-sudo-email" type="text" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <label for="cad-sudo-senha" style="font-weight: bold; margin-bottom: 5px;">Senha do Admin</label>
+                        <input id="cad-sudo-senha" type="password" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    </div>
+                    
+                    <div style="grid-column: span 2; text-align: right; margin-top: 10px;">
+                        <button type="submit" class="primary-btn" style="width: auto; padding: 12px 30px;"><i class="bi bi-save"></i> Efetivar Cadastro</button>
+                    </div>
+                </form>
             </div>
         </section>
     </main>

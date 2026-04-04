@@ -36,7 +36,43 @@ class FilaAdmin {
     bindEvents() {
         this.tabs.forEach((tab) => {
             tab.addEventListener('click', () => {
-                this.setSection(tab.dataset.section, tab.dataset.label);
+                const targetSection = tab.dataset.section;
+                const setorAcessoBruto = localStorage.getItem('setorLogado') || '';
+                
+                // Tratar normalização do texto
+                const sectionMap = {
+                    'Audiência': 'audiencia',
+                    'Consulta': 'consulta',
+                    'Serviço Social': 'servicoSocial',
+                    'Administrador': 'administrador'
+                };
+                
+                const setorKey = sectionMap[setorAcessoBruto];
+                
+                if (setorKey !== 'administrador' && setorKey !== targetSection) {
+                    alert('VOCÊ ESTÁ TENTANDO ACESSAR DEPARTAMENTOS DO QUAL VOCÊ NÃO ESTÁ AUTORIZADO A OPERAR!');
+                    
+                    // Agenda notificação após 5 minutos (300.000 ms)
+                    setTimeout(() => {
+                        if (Notification.permission === 'granted') {
+                            new Notification('Alerta do Sistema de Filas', {
+                                body: `Tentativa detectada de furar jurisdição: Você logou em ${setorAcessoBruto} mas tentou acessar o relatório de ${targetSection}.`
+                            });
+                        } else if (Notification.permission !== 'denied') {
+                            Notification.requestPermission().then(permission => {
+                                if (permission === 'granted') {
+                                    new Notification('Alerta do Sistema de Filas', {
+                                        body: 'Tentativa não autorizada salva no log do sistema de fila.'
+                                    });
+                                }
+                            });
+                        }
+                    }, 300000);
+                    
+                    return; // Bloqueia a troca de tab visualmente
+                }
+
+                this.setSection(targetSection, tab.dataset.label);
             });
         });
 
@@ -108,6 +144,10 @@ class FilaAdmin {
                     if (!exists) {
                         this.dados[payload.table].unshift(payload.data);
                         this.updateBadges();
+                        
+                        // Emitir Alerta Sonoro Tonal
+                        this.tocarAlerta();
+
                         if (payload.table === this.currentSection) {
                             this.renderCurrentSection();
                         }
@@ -217,6 +257,29 @@ class FilaAdmin {
         if (!cpf) return '-';
         const onlyNumbers = String(cpf).replace(/\D/g, '');
         return onlyNumbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    }
+
+    tocarAlerta() {
+        try {
+            const context = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = context.createOscillator();
+            const gainNode = context.createGain();
+
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(880, context.currentTime); // Frequência A5 (aguda p/ notificação)
+            
+            gainNode.gain.setValueAtTime(0, context.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.5, context.currentTime + 0.05); // Suaviza o começo
+            gainNode.gain.linearRampToValueAtTime(0, context.currentTime + 0.3);    // Fadeout
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(context.destination);
+            
+            oscillator.start(context.currentTime);
+            oscillator.stop(context.currentTime + 0.3); // Dura 300ms
+        } catch(e) {
+            console.error('Navegador bloqueou áudio ou Web Audio API não suportada');
+        }
     }
 }
 

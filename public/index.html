@@ -6,7 +6,6 @@
     <link rel="shortcut icon" href="assets/img/forum.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/portal.css">
     <title>Fórum - Acesso ao Sistema</title>
 </head>
 <body>
@@ -21,20 +20,27 @@
         </div>
     </aside>
     <section>
-        <div class="txt-informacao portal-home">
-            <div class="txt">
-                <p>
-                    Selecione qual parte do sistema deseja acessar: <strong>Entrada</strong> para o fluxo do cidadão
-                    (CPF e serviço), <strong>Chamada</strong> para o painel de exibição das senhas, ou
-                    <strong>Atendimento</strong> para o painel administrativo.
-                </p>
+        <div class="login-card">
+            <div class="login-title">
+                <i class="bi bi-shield-check"></i>
+                <h2>Login</h2>
             </div>
-            <div class="portal-actions">
-                <a href="entrada/01-auth.html" class="portal-link"><i class="bi bi-door-open"></i> Entrada</a>
-                <a href="chamada/chamador.html" class="portal-link"><i class="bi bi-megaphone"></i> Chamada</a>
-                <a href="admin/01-authAt.html" class="portal-link"><i class="bi bi-person-badge"></i> Atendimento</a>
-            </div>
+            <form id="login-form">
+                <label for="idUser">Usuário</label>
+                <input id="idUser" type="text" required placeholder="Informe seu usuário">
+                <label for="setor">Setor</label>
+                <select id="setor" required style="padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; font-family: inherit; transition: all 0.3s ease; background: #f8fafc; color: #1a202c; width: 100%; border-color: var(--color-buton);">
+                    <option value="" disabled selected>Escolha o setor</option>
+                    <option value="Audiência">Audiência</option>
+                    <option value="Consulta">Consulta</option>
+                    <option value="Serviço Social">Serviço Social</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Início de Atendimento">Início de Atendimento</option>
+                </select>
+                <button class="primary-btn" type="submit">Entrar</button>
+            </form>
         </div>
     </section>
+    <script type="module" src="/src/javascrip/login.js"></script>
 </body>
 </html>

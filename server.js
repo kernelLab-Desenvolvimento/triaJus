@@ -15,8 +15,10 @@ app.use(cors());
 // Rotas nomeadas antes do static: evita que pastas em public/ (ex.: /entrada) interceptem antes do sendFile
 const usersRoutes = require('./config/routes/usersrouter');
 const apiRoutes = require('./config/routes/apirouter.js');
+const authRoutes = require('./config/routes/authrouter.js');
 app.use('/', usersRoutes);
 app.use('/api', apiRoutes);
+app.use('/auth', authRoutes);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/src', express.static(path.join(__dirname, 'src')));

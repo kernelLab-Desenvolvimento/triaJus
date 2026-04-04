@@ -35,15 +35,18 @@ O **TriaJus** é uma plataforma desenvolvida para gerenciar o fluxo de atendimen
 
 - **Problema que resolve**: Desorganização em filas de espera e falta de direcionamento claro para serviços judiciários específicos (Audiências, Consultas de Processo e Serviço Social).
 - **Público-alvo**: Cidadãos, Advogados e Servidores do Poder Judiciário.
-- **Principais funcionalidades**: Autoatendimento para emissão de tickets, triagem guiada de serviços por horário, sincronização de painel via WebSocket e impressão de comprovantes otimizados.
+- **Principais funcionalidades**: Autoatendimento para emissão de tickets, triagem guiada de serviços por horário, sincronização de painel via WebSocket, administração sistêmica com controle de acesso e impressão de comprovantes otimizados.
 
 ### ✨ Funcionalidades Principais
 
-- ✅ Totem de autoatendimento com identificação por CPF.
-- ✅ Triagem condicional (ex: escolha de horários restritos para audiências).
-- ✅ Geração inteligente de senhas alfanuméricas sequenciais (ex: `AUD10`, `CON001`).
-- ✅ Painel do chamador em tempo real atualizado via WebSockets.
-- ✅ Comprovante de atendimento preparado para impressão térmica.
+- ✅ **Totem de Autoatendimento** com identificação por CPF.
+- ✅ **Gerenciamento Unificado de Filas** e triagem condicional por horários.
+- ✅ **Geração Inteligente de Senhas** alfanuméricas sequenciais (ex: `AUD10`, `CON001`).
+- ✅ **Painel de Chamadas em Tempo Real** atualizado via WebSockets com **Alertas Sonoros Sintetizados**.
+- ✅ **Módulo de Administração RBAC (Role-Based Access Control)** com login em dropdown com Múltiplas Permissões Setoriais.
+- ✅ **Alertas Antifurto de Jurisdição** com isolamento de cache, bloqueio em tela, e *Web Notifications* do desktop.
+- ✅ **Reset Global Sudo** via painel dedicado que aciona deleções em massa seguras no SQLite.
+- ✅ **Comprovante de atendimento** preparado para impressão térmica.
 
 ---
 
