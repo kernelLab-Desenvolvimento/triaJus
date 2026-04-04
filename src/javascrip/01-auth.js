@@ -38,7 +38,7 @@ export function auth() {
             console.log("cpf armazenado:", localStorage.getItem('cpf'));
             
             setTimeout(() => {
-                window.location.href = './02-service.html';
+                window.location.href = '/entrada/02-service.html';
             }, 1000);
         } else {
             cpfMessage.innerHTML = '<span style="color: red;">Por favor, insira um CPF válido</span>';

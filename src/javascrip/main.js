@@ -14,10 +14,10 @@ window.addEventListener("DOMContentLoaded", async () => {
     console.log('📍 Página atual:', currentPage);
     
     // ✅ Executa as funções baseado na página atual
-    if (currentPage.includes("01-auth.html")) {
+    if (currentPage === "entrada" || currentPage.includes("01-auth.html")) {
         auth(); // Executa a função auth
     }
-    if (currentPage.includes("01-authAt.html")) {
+    if (currentPage === "atendimento" || currentPage.includes("01-authAt.html")) {
         authAt(); // Executa a função authAt - INDEPENDENTE
     }
     if (currentPage.includes("02-service.html")) {
