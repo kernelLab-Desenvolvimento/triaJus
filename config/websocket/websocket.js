@@ -17,7 +17,6 @@ wss.on('connection', (ws) => {
             const data = JSON.parse(message);
             if (data.type && clients[data.type]) {
                 clients[data.type].add(ws);
-                ws.tableType = data.type;
             }
         } catch (error) {
             console.error('Erro WebSocket:', error);
@@ -25,8 +24,8 @@ wss.on('connection', (ws) => {
     });
 
     ws.on('close', () => {
-        if (ws.tableType && clients[ws.tableType]) {
-            clients[ws.tableType].delete(ws);
+        for (const table in clients) {
+            clients[table].delete(ws);
         }
     });
 });

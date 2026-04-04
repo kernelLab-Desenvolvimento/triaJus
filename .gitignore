@@ -35,3 +35,8 @@ backend/.env
 *.tmp
 *.temp
 .cache/
+
+# Banco de Dados
+*.sqlite
+*.sqlite3
+*.db

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         
-        const email = document.getElementById('admin-email').value;
+        const usuario = document.getElementById('admin-usuario').value;
         const password = document.getElementById('admin-password').value;
 
         fetch('/api/wipe', {
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ usuario, password })
         })
         .then(res => res.json())
         .then(data => {

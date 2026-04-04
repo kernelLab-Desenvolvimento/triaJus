@@ -32,8 +32,8 @@ router.post('/login', (req, res) => {
                 return res.status(403).json({ error: 'Usuário não tem autorização para conectar neste setor.' });
             }
 
-            // 3. Registra o acesso na tabela login
-            const loginQuery = `INSERT INTO login (idUser, setor) VALUES (?, ?)`;
+            // 3. Registra o acesso na tabela login (REPLACE sobrescreve caso UNIQUE conflitante)
+            const loginQuery = `INSERT OR REPLACE INTO login (idUser, setor) VALUES (?, ?)`;
             dbUsers.run(loginQuery, [idUser, setor], function(err) {
                 if (err) {
                     return res.status(500).json({ error: 'Erro ao registrar login: ' + err.message });
@@ -56,10 +56,13 @@ router.post('/login', (req, res) => {
 
 // POST - Rota de Registro de novo usuário
 router.post('/register', (req, res) => {
-    const { nome, cpf, matricula, senha, setores, sudoEmail, sudoSenha } = req.body;
+    const { nome, cpf, matricula, senha, setores, sudoUsuario, sudoSenha } = req.body;
 
     // Verificação de sudo
-    if (sudoEmail !== 'dev' || sudoSenha !== 'dev') {
+    const suUser = process.env.SUDO_USER || 'dev';
+    const suPass = process.env.SUDO_PASS || 'dev';
+    
+    if (sudoUsuario !== suUser || sudoSenha !== suPass) {
         return res.status(401).json({ error: 'Autorização sudo negada. Credenciais Sudo incorretas.' });
     }
 

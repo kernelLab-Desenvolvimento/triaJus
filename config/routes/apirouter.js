@@ -156,7 +156,7 @@ router.get('/:table', dbAcess, (req, res) => {
     }
     
     const sql = `SELECT * FROM ${table} 
-                 WHERE DATE(created_at) = DATE('now', '-3 hours') 
+                 WHERE DATE(created_at, 'localtime') = DATE('now', 'localtime') 
                  ORDER BY created_at DESC`;
     
     db.all(sql, [], (err, rows) => {
@@ -170,10 +170,13 @@ router.get('/:table', dbAcess, (req, res) => {
 
 // POST - Wipe Database
 router.post('/wipe', dbAcess, (req, res) => {
-    const { email, password } = req.body;
+    const { usuario, password } = req.body;
     
     // Verificação de sudo
-    if (email === 'dev' && password === 'dev') {
+    const suUser = process.env.SUDO_USER || 'dev';
+    const suPass = process.env.SUDO_PASS || 'dev';
+    
+    if (usuario === suUser && password === suPass) {
         const { db } = req;
         db.serialize(() => {
             db.run('DELETE FROM audiencia');

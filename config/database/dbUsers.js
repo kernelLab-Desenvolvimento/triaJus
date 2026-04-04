@@ -20,8 +20,8 @@ function initializeDatabase() {
             cpf TEXT,
             matricula TEXT NOT NULL,
             senha TEXT,
-            idUser TEXT NOT NULL,
-            created_at DATETIME DEFAULT (datetime('now', '-3 hours'))
+            idUser TEXT NOT NULL UNIQUE,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`);
 
         // Tabela setores
@@ -29,15 +29,15 @@ function initializeDatabase() {
             ID INTEGER PRIMARY KEY AUTOINCREMENT,
             setor TEXT NOT NULL,
             idUser TEXT NOT NULL,
-            created_at DATETIME DEFAULT (datetime('now', '-3 hours'))
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`);
 
         // Tabela login
         dbUsers.run(`CREATE TABLE IF NOT EXISTS login (
             ID INTEGER PRIMARY KEY AUTOINCREMENT,
             idUser TEXT NOT NULL,
-            setor TEXT NOT NULL,
-            created_at DATETIME DEFAULT (datetime('now', '-3 hours'))
+            setor TEXT NOT NULL UNIQUE,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`);
 
         // Inserir dados de teste se a tabela users estiver vazia pra faciliar o teste inicial

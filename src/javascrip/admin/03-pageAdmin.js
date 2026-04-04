@@ -5,10 +5,12 @@ class FilaAdmin {
         this.currentSection = 'audiencia';
         this.currentLabel = 'AUDIÊNCIA';
         this.sessaoSelecionada = '08:00';
+        this.viewMode = 'aguardando';
         this.dados = {
             audiencia: [],
             consulta: [],
             servicoSocial: [],
+            chamada: [],
         };
         this.ws = null;
         this.init();
@@ -31,6 +33,11 @@ class FilaAdmin {
         this.sessionCard = document.getElementById('session-card');
         this.btnChamar = document.getElementById('select');
         this.btnSair = document.getElementById('sair');
+        
+        this.btnAguardando = document.getElementById('btn-view-aguardando');
+        this.btnChamados = document.getElementById('btn-view-chamados');
+        this.containerCpf = document.getElementById('container-cpf-manual');
+        this.selectCpf = document.getElementById('select-cpf-manual');
     }
 
     bindEvents() {
@@ -85,6 +92,28 @@ class FilaAdmin {
         this.btnSair.addEventListener('click', () => {
             window.location.href = '/admin/02-listAt.html';
         });
+
+        if (this.btnAguardando && this.btnChamados) {
+            this.btnAguardando.addEventListener('click', () => this.setViewMode('aguardando'));
+            this.btnChamados.addEventListener('click', () => this.setViewMode('chamados'));
+        }
+    }
+
+    setViewMode(mode) {
+        this.viewMode = mode;
+        if (this.btnAguardando && this.btnChamados) {
+            this.btnAguardando.style.background = mode === 'aguardando' ? 'var(--color-buton)' : 'transparent';
+            this.btnAguardando.style.color = mode === 'aguardando' ? 'white' : 'var(--color-buton)';
+            this.btnChamados.style.background = mode === 'chamados' ? 'var(--color-buton)' : 'transparent';
+            this.btnChamados.style.color = mode === 'chamados' ? 'white' : 'var(--color-buton)';
+        }
+        
+        this.btnChamar.style.display = mode === 'chamados' ? 'none' : 'block';
+        if (this.containerCpf) {
+            this.containerCpf.style.display = (mode === 'aguardando' && this.currentSection === 'servicoSocial') ? 'flex' : 'none';
+        }
+
+        this.renderCurrentSection();
     }
 
     setSection(section, label) {
@@ -99,6 +128,11 @@ class FilaAdmin {
 
         const isConsulta = section === 'consulta';
         this.sessionCard.classList.toggle('hidden', isConsulta);
+        
+        if (this.containerCpf) {
+            this.containerCpf.style.display = (section === 'servicoSocial' && this.viewMode === 'aguardando') ? 'flex' : 'none';
+        }
+
         this.atualizarCabecalhoTabela();
         this.renderCurrentSection();
     }
@@ -108,6 +142,7 @@ class FilaAdmin {
             this.loadSectionData('audiencia'),
             this.loadSectionData('consulta'),
             this.loadSectionData('servicoSocial'),
+            this.loadSectionData('chamada'),
         ]);
 
         this.updateBadges();
@@ -131,7 +166,7 @@ class FilaAdmin {
         this.ws = new WebSocket(wsUrl);
 
         this.ws.onopen = () => {
-            ['audiencia', 'consulta', 'servicoSocial'].forEach((section) => {
+            ['audiencia', 'consulta', 'servicoSocial', 'chamada'].forEach((section) => {
                 this.ws.send(JSON.stringify({ type: section }));
             });
         };
@@ -164,12 +199,37 @@ class FilaAdmin {
     }
 
     renderCurrentSection() {
-        const lista = this.dados[this.currentSection] || [];
+        let lista = this.dados[this.currentSection] || [];
+        const chamadas = this.dados.chamada || [];
+        
+        let cruzados = [];
+        if (this.currentSection === 'audiencia') {
+            cruzados = lista.filter(item => {
+                const isChamado = chamadas.some(c => c.horario === item.horario && c.servico === 'audiencia');
+                return this.viewMode === 'chamados' ? isChamado : !isChamado;
+            });
+        } else {
+            cruzados = lista.filter(item => {
+                const isChamado = chamadas.some(c => c.ticket === item.ticket && c.servico === this.currentSection);
+                return this.viewMode === 'chamados' ? isChamado : !isChamado;
+            });
+        }
+
         const isConsulta = this.currentSection === 'consulta';
         const isAudiencia = this.currentSection === 'audiencia';
         const filtrados = isConsulta
-            ? lista
-            : lista.filter((item) => item.horario === this.sessaoSelecionada);
+            ? cruzados
+            : cruzados.filter((item) => item.horario === this.sessaoSelecionada);
+
+        if (this.currentSection === 'servicoSocial' && this.selectCpf && this.viewMode === 'aguardando') {
+            this.selectCpf.innerHTML = '<option value="">(Chamar Próximo da Fila)</option>';
+            filtrados.forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item.CPF;
+                opt.textContent = this.formatarCPF(item.CPF);
+                this.selectCpf.appendChild(opt);
+            });
+        }
 
         const rows = filtrados.slice(0, 6);
         this.tabelaBody.innerHTML = '';
@@ -205,26 +265,46 @@ class FilaAdmin {
     }
 
     async chamarProximo() {
-        const lista = this.dados[this.currentSection] || [];
-        if (!lista.length) {
-            showError('Nao ha pessoas na fila.');
+        if (this.viewMode === 'chamados') return;
+        
+        let lista = this.dados[this.currentSection] || [];
+        const chamadas = this.dados.chamada || [];
+        
+        let aguardando = [];
+        if (this.currentSection === 'audiencia') {
+            aguardando = lista.filter(item => !chamadas.some(c => c.horario === item.horario && c.servico === 'audiencia'));
+        } else {
+            aguardando = lista.filter(item => !chamadas.some(c => c.ticket === item.ticket && c.servico === this.currentSection));
+        }
+
+        const isConsulta = this.currentSection === 'consulta';
+        const filtrados = isConsulta
+            ? aguardando
+            : aguardando.filter((item) => item.horario === this.sessaoSelecionada);
+
+        if (!filtrados.length) {
+            showError('Nao ha mais pessoas aguardando nesta sessao.');
             return;
         }
 
-        const proximo = this.currentSection === 'consulta'
-            ? lista[0]
-            : lista.find((item) => item.horario === this.sessaoSelecionada);
+        let proximo = filtrados[0];
 
-        if (!proximo) {
-            showError('Nao ha mais pessoas na sessao selecionada.');
-            return;
+        if (this.currentSection === 'servicoSocial' && this.selectCpf && this.selectCpf.value) {
+            const selecionado = filtrados.find(item => item.CPF === this.selectCpf.value);
+            if (selecionado) proximo = selecionado;
         }
 
         await this.registrarChamada(proximo);
-        this.dados[this.currentSection] = lista.filter((item) => item.ID !== proximo.ID);
+        
+        this.dados.chamada.push({
+            ticket: proximo.ticket,
+            horario: proximo.horario || '',
+            servico: this.currentSection
+        });
+        
         this.updateBadges();
         this.renderCurrentSection();
-        showError(`Chamando: ${proximo.ticket}`);
+        showError(`Chamando: ${proximo.ticket || 'Sessão ' + proximo.horario}`);
     }
 
     async registrarChamada(registro) {
@@ -244,12 +324,23 @@ class FilaAdmin {
     }
 
     updateBadges() {
+        const chamadas = this.dados.chamada || [];
         Object.keys(this.dados).forEach((section) => {
+            if (section === 'chamada') return;
             const badge = document.getElementById(`badge-${section}`);
             if (!badge) return;
-            const count = this.dados[section].length;
-            badge.textContent = String(count);
-            badge.style.display = count > 0 ? 'inline-flex' : 'none';
+            
+            const lista = this.dados[section] || [];
+            let aguardando = 0;
+            
+            if (section === 'audiencia') {
+                aguardando = lista.filter(item => !chamadas.some(c => c.horario === item.horario && c.servico === 'audiencia')).length;
+            } else {
+                aguardando = lista.filter(item => !chamadas.some(c => c.ticket === item.ticket && c.servico === section)).length;
+            }
+            
+            badge.textContent = String(aguardando);
+            badge.style.display = aguardando > 0 ? 'inline-flex' : 'none';
         });
     }
 

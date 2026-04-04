@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cpf = document.getElementById('cad-cpf').value;
             const matricula = document.getElementById('cad-matricula').value;
             const senha = document.getElementById('cad-senha').value;
-            const sudoEmail = document.getElementById('cad-sudo-email').value;
+            const sudoUsuario = document.getElementById('cad-sudo-usuario').value;
             const sudoSenha = document.getElementById('cad-sudo-senha').value;
 
             const setoresCheckboxes = document.querySelectorAll('.cad-setor-checkbox:checked');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch('/auth/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome, cpf, matricula, senha, setores, sudoEmail, sudoSenha })
+                    body: JSON.stringify({ nome, cpf, matricula, senha, setores, sudoUsuario, sudoSenha })
                 });
 
                 const data = await response.json();

@@ -42,7 +42,13 @@
 
             <section class="table-and-session">
                 <div class="table-card">
-                    <h2 id="titulo-lista">AUDIÊNCIA</h2>
+                    <div class="table-header-controls" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h2 id="titulo-lista" style="margin: 0;">AUDIÊNCIA</h2>
+                        <div class="view-toggle" style="display: flex; gap: 5px; border-radius: 5px; overflow: hidden; border: 1px solid var(--color-buton);">
+                            <button id="btn-view-aguardando" style="padding: 5px 15px; border: none; background: var(--color-buton); color: white; cursor: pointer; font-weight: bold;">Aguardando</button>
+                            <button id="btn-view-chamados" style="padding: 5px 15px; border: none; background: transparent; color: var(--color-buton); cursor: pointer; font-weight: bold;">Chamados</button>
+                        </div>
+                    </div>
                     <div class="table-scroll">
                         <table class="fila-atendimento">
                             <thead>
@@ -75,7 +81,13 @@
                 </div>
             </section>
 
-            <div class="control-actions">
+            <div class="control-actions" style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                <div id="container-cpf-manual" style="display: none; align-items: center; gap: 10px; background: white; padding: 5px 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    <label for="select-cpf-manual" style="font-weight: bold; color: var(--color-letter);">CPF Específico:</label>
+                    <select id="select-cpf-manual" style="padding: 5px; border-radius: 3px; border: 1px solid #aaa;">
+                        <option value="">(Chamar Próximo da Fila)</option>
+                    </select>
+                </div>
                 <button class="primary-btn" id="select"><i class="bi bi-arrow-counterclockwise"></i> CHAMAR</button>
                 <button class="secondary-btn" id="sair"><i class="bi bi-arrow-left-square-fill"></i> SAIR</button>
             </div>
