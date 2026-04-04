@@ -23,7 +23,11 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #f7f9fc;
     height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Corta a rolagem global, garantindo tela limpa 16:9 de TVs / Totens */
+    margin: 0;
+    padding: 0;
 }
 
 a {

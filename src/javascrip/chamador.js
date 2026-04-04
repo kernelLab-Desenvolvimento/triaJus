@@ -31,6 +31,7 @@ class ChamadaAtual {
                 
                 if (data.type === 'NEW_RECORD' && data.table === 'chamada') {
                     this.adicionarChamada(data.data);
+                    this.tocarAlertaChamada();
                 }
             } catch (error) {
                 console.error('❌ Erro ao processar mensagem WebSocket:', error);
@@ -130,6 +131,31 @@ class ChamadaAtual {
         const horaHeader = document.getElementById('hora');
         if (dataHeader) dataHeader.textContent = dataFormatada;
         if (horaHeader) horaHeader.textContent = horaFormatada;
+    }
+
+    tocarAlertaChamada() {
+        try {
+            const context = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = context.createOscillator();
+            const gainNode = context.createGain();
+
+            // Usando uma onda 'square' (ou sine) numa frequência menos aguda e mais cheia
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(659.25, context.currentTime); // Mi 5
+            
+            gainNode.gain.setValueAtTime(0, context.currentTime);
+            // Envelope percussivo rápido de gongo/carrilhão
+            gainNode.gain.linearRampToValueAtTime(0.8, context.currentTime + 0.05); 
+            gainNode.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.5);   
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(context.destination);
+            
+            oscillator.start(context.currentTime);
+            oscillator.stop(context.currentTime + 0.6);
+        } catch(e) {
+            console.error('Navegador bloqueou áudio do chamador silenciosamente', e);
+        }
     }
 
     destroy() {
