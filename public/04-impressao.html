@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/css/index.css">
+    <link rel="stylesheet" href="/src/css/04-impressao.css">
+    <link rel="shortcut icon" href="./img/FÓRUM.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Comprovante - FÓRUM</title>
+</head>
+<body>
+    <aside>
+        <div class="container">
+            <div class="link">
+                <a href="./index.html"><i class="bi bi-arrow-left-square-fill">VOLTAR PARA O INÍCIO</i></a>
+            </div>
+            <picture>
+                <div class="img">
+                    <img src="./img/FÓRUM.png" alt="logo do fórum">
+                </div>
+                <figure>PODER JUDICIÁRIO FÓRUM</figure>
+            </picture>
+        </div>
+    </aside>
+
+    <section>
+        <main class="container-imp">
+            <div class="main_gerador">
+                <!-- Cabeçalho com Logo -->
+                <div class="cabecalho-comprovante">
+                    <div class="cabecalho-esquerda">
+                        <img class="cabecalho-logo" src="./img/FÓRUM.png" alt="Logo Fórum">
+                        <h1 class="cabecalho-titulo">PODER JUDICIÁRIO<br>FÓRUM</h1>
+                    </div>
+                </div>
+                
+                <!-- Data e Hora lado a lado -->
+                <div class="data-hora-container">
+                    <p class="data-class"><strong>DATA</strong> <span id="data"></span></p>
+                    <p class="hora-class"><strong>HORA</strong> <span id="hora"></span></p>
+                </div>
+                
+                <!-- Conteúdo Principal -->
+                <div class="conteudo-principal">
+                    <!-- CPF -->
+                    <div class="cpf-container">
+                        <p class="cpf"><strong>CPF:</strong> <span id="cpf"></span></p>
+                    </div>
+                    
+                    <!-- Senha e Serviço -->
+                    <div class="senha-servico-container">
+                        <div class="senha-numero" id="numeroSequencial">001</div>
+                        <div class="servico-container" id="servicoDisplay"></div>
+                    </div>
+                    
+                    <!-- Horário (apenas para audiência e serviço social) -->
+                    <div class="horario-container" id="horarioSection">
+                        <strong>SEU HORÁRIO:</strong>
+                        <span id="horario"></span>
+                    </div>
+                </div>
+                
+                <!-- Botões -->
+                <div class="btn_ajuste_gerador">
+                    <button class="btn_gerador" onclick="window.location.href='./index.html'">CANCELAR</button>
+                    <button class="btn_gerador" id="btn_gerador">CONFIRMAR</button>
+                </div>
+            </div>
+            </main>
+    </section>
+    <script type="module" src="/src/javascrip/main.js"></script>
+</body>
+</html>
