@@ -25,18 +25,17 @@ body {
     min-height: 100vh;
     width: 100vw;
     overflow: hidden; /* Corta a rolagem global, garantindo tela limpa 16:9 de TVs / Totens */
-    
 }
 
-a {
+a{
     display: flex;
-    text-decoration: none;
+    text-align: center;
     align-items: center;
     justify-content: center;
-     font-size: 30px;
-     gap: 10px;
-     height: 20px;
-     text-align: center;
+    font-size: 30px;
+    gap: 10px;
+    height: 20px;
+    text-decoration: none;
     color: var(--text-p-h2);
     transition: all 0.3s ease;
 }
@@ -53,13 +52,18 @@ picture {
     gap: 50px;
 }
 
-figure {
-    font-size: 32px;
-    color: var(--text-p-h2);
-    font-weight: bold;
-    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+
+.figure{
+text-align: center;
+letter-spacing: 1px;
 }
 
+figure {
+    font-size: 30px;
+    color: var(--text-p-h2);
+    font-weight: bolder;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
 section {
     flex: 1;
     display: flex;
@@ -70,25 +74,25 @@ section {
 }
 
 
+
 .bi-arrow-left-square-fill {
     color: var(--text-p-h2);
 }
 
 /* ============= LAYOUT BASE ================ */
-aside .container {
+aside,.container{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
     flex-flow: column;
+    gap: 50px;
     width: 100%;
     min-width: 400px;
     max-width: 500px;
     height: 100vh;
     background: var(--primary-gradient);
-    
-    
 }
+
 
 
 /* ============= ESTILOS DO CARTÃO DE LOGIN ================ */
@@ -96,10 +100,10 @@ aside .container {
 .login-card {
     background: rgba(255, 255, 255, 0.95);
     padding: 50px 40px;
-    border-radius: 20px;
+    border-radius: 25px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     border: 1px solid rgba(255,255,255,0.4);
     backdrop-filter: blur(15px);
     display: flex;
@@ -228,4 +232,4 @@ aside .container {
     section {
         padding: 40px 20px;
     }
-}
+} 
