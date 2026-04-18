@@ -23,7 +23,7 @@ export function infoReq() {
             
             // Adiciona seleção ao horário clicado
             this.classList.add('selected');
-            this.style.backgroundColor = '#1f3449ff';
+            this.style.backgroundColor = '#9e2929ff';
             this.style.color = 'white';
             
             // Obtém o TÍTULO do botão em vez do texto

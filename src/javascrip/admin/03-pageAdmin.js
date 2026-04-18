@@ -102,10 +102,10 @@ class FilaAdmin {
     setViewMode(mode) {
         this.viewMode = mode;
         if (this.btnAguardando && this.btnChamados) {
-            this.btnAguardando.style.background = mode === 'aguardando' ? 'var(--color-buton)' : 'transparent';
-            this.btnAguardando.style.color = mode === 'aguardando' ? 'white' : 'var(--color-buton)';
-            this.btnChamados.style.background = mode === 'chamados' ? 'var(--color-buton)' : 'transparent';
-            this.btnChamados.style.color = mode === 'chamados' ? 'white' : 'var(--color-buton)';
+            this.btnAguardando.style.background = mode === 'chamados' ? 'var(--color-buton)' : '#43831eff';
+            this.btnAguardando.style.color = mode === 'chamados' ? 'black' : 'var(--color-buton)';
+            this.btnChamados.style.background = mode === 'aguardando' ? 'var(--color-buton)' : '#43831eff';
+            this.btnChamados.style.color = mode === 'aguardando' ? 'black' : 'var(--color-buton)';
         }
         
         this.btnChamar.style.display = mode === 'chamados' ? 'none' : 'block';
