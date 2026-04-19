@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+/* ============= RESET GLOBAL ================ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ============= VARIÁVEIS ================ */
 :root {
     --color-buton: #2d308e;
     --central-color: #f0f0f0;
@@ -18,6 +20,7 @@
     --primary-gradient: linear-gradient(135deg, var(--forum-color), #1a1d82);
 }
 
+/* ============= BODY ================ */
 body {
     display: flex;
     font-family: 'Inter', sans-serif;
@@ -25,18 +28,18 @@ body {
     min-height: 100vh;
     width: 100vw;
     overflow: hidden; /* Corta a rolagem global, garantindo tela limpa 16:9 de TVs / Totens */
-    
 }
 
+/* ============= LINKS ================ */
 a {
     display: flex;
-    text-decoration: none;
+    text-align: center;
     align-items: center;
     justify-content: center;
-     font-size: 30px;
-     gap: 10px;
-     height: 20px;
-     text-align: center;
+    font-size: 30px;
+    gap: 10px;
+    height: 20px;
+    text-decoration: none;
     color: var(--text-p-h2);
     transition: all 0.3s ease;
 }
@@ -45,6 +48,7 @@ a:hover {
     border-bottom: solid 1px var(--text-p-h2);
 }
 
+/* ============= PICTURE / FIGURE ================ */
 picture {
     display: flex;
     flex-direction: column;
@@ -54,12 +58,13 @@ picture {
 }
 
 figure {
-    font-size: 32px;
+    font-size: 30px;
     color: var(--text-p-h2);
-    font-weight: bold;
+    font-weight: bolder;
     text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* ============= SECTION ================ */
 section {
     flex: 1;
     display: flex;
@@ -69,37 +74,33 @@ section {
     background: radial-gradient(circle at top right, #ffffff, #eef1f6);
 }
 
-
+/* ============= ÍCONES ================ */
 .bi-arrow-left-square-fill {
     color: var(--text-p-h2);
 }
 
-/* ============= LAYOUT BASE ================ */
+/* ============= LAYOUT BASE (ASIDE + CONTAINER) ================ */
 aside .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
     flex-flow: column;
+    gap: 50px;
     width: 100%;
     min-width: 400px;
     max-width: 500px;
     height: 100vh;
     background: var(--primary-gradient);
-    
-    
 }
 
-
 /* ============= ESTILOS DO CARTÃO DE LOGIN ================ */
-
 .login-card {
     background: rgba(255, 255, 255, 0.95);
     padding: 50px 40px;
-    border-radius: 20px;
+    border-radius: 25px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     border: 1px solid rgba(255,255,255,0.4);
     backdrop-filter: blur(15px);
     display: flex;
@@ -163,6 +164,7 @@ aside .container {
     color: #a0aec0;
 }
 
+/* ============= BOTÃO PRIMÁRIO ================ */
 .primary-btn {
     margin-top: 15px;
     background: var(--primary-gradient);
@@ -188,7 +190,6 @@ aside .container {
 }
 
 /* ============= ANIMAÇÕES ================ */
-
 @keyframes slideUp {
     from {
         opacity: 0;

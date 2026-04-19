@@ -256,25 +256,15 @@ body.adm-page {
 }
 
 .table-and-session {
-    display: grid;
-    grid-template-columns: 1fr 240px;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 
-.table-card,
-.session-card {
+.table-card {
     background-color: #d8e1e1;
     border-radius: 16px;
     overflow: hidden;
-}
-
-.table-card h2,
-.session-card h2 {
-    background: linear-gradient(90deg, #4c46f5, #2f52ff);
-    color: #fff;
-    text-align: center;
-    padding: 14px;
-    font-size: 1.4rem;
 }
 
 .table-scroll {
@@ -302,21 +292,39 @@ body.adm-page {
     top: 0;
 }
 
-.session-card {
-    padding-bottom: 14px;
+/* ============= SELETOR DE SESSÃO (dentro do header) ================ */
+.session-select-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.session-select-wrapper.hidden {
+    display: none;
 }
 
 .selecionar-interno {
-    width: calc(100% - 20px);
-    margin: 14px 10px 0;
-    padding: 10px;
+    padding: 6px 12px;
     border-radius: 8px;
-    border: 1px solid #94a3b8;
+    border: 2px solid var(--adm-primary);
     font-weight: 600;
+    font-size: 0.8rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--adm-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.session-card.hidden {
-    display: none;
+.selecionar-interno option {
+    background: #fff;
+    color: var(--adm-text);
+}
+
+.selecionar-interno:hover,
+.selecionar-interno:focus {
+    border-color: var(--adm-primary-dark);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.1);
 }
 
 .control-actions {
@@ -325,12 +333,113 @@ body.adm-page {
     gap: 18px;
 }
 
+/* ============= TOGGLE AGUARDANDO / CHAMADOS ================ */
+.table-header-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 14px 20px;
+}
+
+.table-header-controls h2 {
+    margin: 0;
+    background: none;
+    color: #4b4b4b;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-align: center;
+    padding: 0;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.header-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 263px;
+    width: 100%;
+}
+
+.view-toggle {
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--adm-primary);
+    box-shadow: 0 2px 8px rgba(0, 74, 173, 0.15);
+}
+
+.view-toggle-btn {
+    padding: 6px 16px;
+    border: none;
+    background: transparent;
+    color: var(--adm-primary);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.8rem;
+    font-family: inherit;
+    letter-spacing: 0.3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.view-toggle-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.view-toggle-btn:active::after {
+    width: 200px;
+    height: 200px;
+}
+
+/* Estado ativo */
+.view-toggle-btn.active {
+    background: linear-gradient(135deg, var(--adm-primary), var(--adm-primary-dark));
+    color: #fff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 74, 173, 0.35);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover no botão inativo */
+.view-toggle-btn:not(.active):hover {
+    background: rgba(0, 74, 173, 0.1);
+    color: var(--adm-primary-dark);
+    transform: scale(1.02);
+}
+
+/* Clique (active) — efeito de pressionar */
+.view-toggle-btn:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+.view-toggle-btn.active:active {
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 74, 173, 0.25);
+}
+
 @media (max-width: 900px) {
     .adm-header-content h1 {
         font-size: 1.35rem;
     }
 
-    .table-and-session {
-        grid-template-columns: 1fr;
+    .header-controls-row {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .view-toggle-btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
     }
 }

@@ -102,10 +102,8 @@ class FilaAdmin {
     setViewMode(mode) {
         this.viewMode = mode;
         if (this.btnAguardando && this.btnChamados) {
-            this.btnAguardando.style.background = mode === 'chamados' ? 'var(--color-buton)' : '#43831eff';
-            this.btnAguardando.style.color = mode === 'chamados' ? 'black' : 'var(--color-buton)';
-            this.btnChamados.style.background = mode === 'aguardando' ? 'var(--color-buton)' : '#43831eff';
-            this.btnChamados.style.color = mode === 'aguardando' ? 'black' : 'var(--color-buton)';
+            this.btnAguardando.classList.toggle('active', mode === 'aguardando');
+            this.btnChamados.classList.toggle('active', mode === 'chamados');
         }
         
         this.btnChamar.style.display = mode === 'chamados' ? 'none' : 'block';

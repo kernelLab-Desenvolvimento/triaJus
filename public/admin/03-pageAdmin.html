@@ -42,11 +42,22 @@
 
             <section class="table-and-session">
                 <div class="table-card">
-                    <div class="table-header-controls" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                        <h2 id="titulo-lista" style="margin: 0;">AUDIÊNCIA</h2>
-                        <div class="view-toggle" style="display: flex; gap: 5px; border-radius: 5px; overflow: hidden; border: 1px solid var(--color-buton);">
-                            <button id="btn-view-aguardando" style="padding: 5px 15px; border: none; background: var(--color-buton); cursor: pointer; font-weight: bold;">Aguardando</button>
-                            <button id="btn-view-chamados" style="padding: 5px 15px; border: none; background: transparent; color: var(--color-buton); cursor: pointer; font-weight: bold;">Chamados</button>
+                    <div class="table-header-controls">
+                        <h2 id="titulo-lista">AUDIÊNCIA</h2>
+                        <div class="header-controls-row">
+                            <div class="session-select-wrapper" id="session-card">
+                                <select class="selecionar-interno" id="selecao-sessao">
+                                    <option value="08:00">SESSÃO 1 - 08:00</option>
+                                    <option value="09:00">SESSÃO 2 - 09:00</option>
+                                    <option value="10:00">SESSÃO 3 - 10:00</option>
+                                    <option value="11:00">SESSÃO 4 - 11:00</option>
+                                    <option value="12:00">SESSÃO 5 - 12:00</option>
+                                </select>
+                            </div>
+                            <div class="view-toggle">
+                                <button id="btn-view-aguardando" class="view-toggle-btn active">Aguardando</button>
+                                <button id="btn-view-chamados" class="view-toggle-btn">Chamados</button>
+                            </div>
                         </div>
                     </div>
                     <div class="table-scroll">
@@ -67,17 +78,6 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-
-                <div class="session-card" id="session-card">
-                    <h2>SESSÃO</h2>
-                    <select class="selecionar-interno" id="selecao-sessao">
-                        <option value="08:00">SESSÃO 1 - 08:00</option>
-                        <option value="09:00">SESSÃO 2 - 09:00</option>
-                        <option value="10:00">SESSÃO 3 - 10:00</option>
-                        <option value="11:00">SESSÃO 4 - 11:00</option>
-                        <option value="12:00">SESSÃO 5 - 12:00</option>
-                    </select>
                 </div>
             </section>
 

@@ -1,12 +1,11 @@
+/* ============= TELA 01 - AUTENTICAÇÃO (CPF) ================ */
+
 @keyframes pisca {
     0% { opacity: 0.2; }
     50% { opacity: 1; }
     100% { opacity: 0.2; }
 }
 
-
-
-/* ============= TELA 01 - AUTENTICAÇÃO ================ */
 .container-main-cpf {
     display: flex;
     align-items: center;
@@ -50,8 +49,7 @@
     transform: translateY(-2px);
 }
 
-
-.CPF{
+.CPF {
     width: 300px;
     border: 3px solid var(--forum-color);
     border-radius: 5px;
@@ -60,9 +58,7 @@
     outline: 0;
 }
 
-
-
-.cp{
+.cp {
     font-size: 30px;
     color: var(--forum-color);
     animation-name: pisca;
@@ -70,19 +66,14 @@
     animation-iteration-count: infinite;
 }
 
-
-
-.alinhamento-form{
+.alinhamento-form {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
 
-
-
-/* ///////////////////// tela de informação ////////////////// */
-
+/* ============= TELA DE INFORMAÇÃO ================ */
 .txt-informacao {
     display: flex;
     align-items: center;
