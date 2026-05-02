@@ -80,14 +80,14 @@ section {
 }
 
 /* ============= LAYOUT BASE (ASIDE + CONTAINER) ================ */
-aside .container {
+aside ,.container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-flow: column;
     gap: 50px;
     width: 100%;
-    min-width: 400px;
+    min-width: 500px;
     max-width: 500px;
     height: 100vh;
     background: var(--primary-gradient);

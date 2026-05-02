@@ -2,156 +2,161 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/img/FÓRUM.png" type="image/x-icon">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/chamador.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel de Chamadas – Fórum</title>
 
-    <title>FÓRUM</title>
+    <link rel="shortcut icon" href="../IMG/FÓRUM.png" type="image/x-icon" />
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;600&display=swap"
+        rel="stylesheet" />
+
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="../assets/css/chamador.css" />
 </head>
 
-<body class="chamador-page">
-    <header>
-        <div class="coteiner-header">
-            <div class="h1-header">
-                <h1>SISTEMA DE ATENDIMENTO</h1>
-            </div>
-            <img class="img-fo" src="../assets/img/FÓRUM.png" alt="">
-            <h1 class="sistema">PODER JUDICIÁRIO FÓRUM </h1>
-            <div class="data-hora">
-                <p id="data">TEG-JS</p>
-                <p id="hora">TEG-JS</p>
+<body>
 
+    <!-- ===================================================
+       HEADER
+  =================================================== -->
+    <header>
+        <div class="header-inner">
+
+            <img class="header-logo" src="../assets/img/forum.png" alt="Logo Fórum" />
+
+            <h1 class="header-titulo">SISTEMA DE ATENDIMENTO — PODER JUDICIÁRIO FÓRUM</h1>
+
+            <div class="header-relogio">
+                <span id="relogio-data">--/--/----</span>
+                <span id="relogio-hora">--:--:--</span>
             </div>
+
         </div>
     </header>
-    
-        
+
+
+    <!-- ===================================================
+       MAIN
+  =================================================== -->
     <main>
-        <section class="section-1">
-            <h1 class="color-h1">CHAMADAS</h1>
-            <div class="container-section">
-            <div class="main_gerador-1">
-            <!-- Cabeçalho com Logo -->
-            <div class="cabecalho-comprovante-1">
-                <div class="cabecalho-esquerda-1">
-                    <img class="cabecalho-logo-1" src="../assets/img/FÓRUM.png" alt="Logo Fórum">
-                    <h1 class="cabecalho-titulo-1">PODER JUDICIÁRIO FÓRUM</h1>
-                </div>
+
+        <!-- ---- CHAMADA ATUAL ---- -->
+        <div class="card card-principal">
+
+            <div class="card-header">
+                <img src="../assets/img/forum.png" alt="Logo Fórum" />
+                <h2>PODER JUDICIÁRIO FÓRUM</h2>
             </div>
 
-            <!-- Data e Hora lado a lado -->
-            <div class="elementos-data-1">
-                <div class="data-hora-container-1">
-                    <p class="data-class-1"><strong>DATA</strong> <span id="data"></span></p>
-                    <p class="hora-class-1"><strong>HORA</strong> <span id="hora"></span></p>
-                </div>
+            <div class="card-data-hora">
+                <p><strong>Data</strong> <span id="data-principal">--/--/----</span></p>
+                <p><strong>Hora</strong> <span id="hora-principal">--:--:--</span></p>
             </div>
 
+            <div class="senha-display piscando">
+                <div class="senha-numero-principal" id="senha-atual">001</div>
+                <div class="senha-servico-principal" id="servico-atual">ATENDIMENTO GERAL</div>
+            </div>
 
-            <!-- Conteúdo Principal -->
-            <div class="conteudo-principal-1">
+            <div class="sessao-bar">
+                <strong>SESSÃO:</strong>
+                <span id="horario-sessao-principal">—</span>
+            </div>
+
+        </div>
 
 
-                <!-- Senha e Serviço -->
-                <div class="elemento-servico-1">
-                    <div class="senha-servico-container-1">
-                        <div class="senha-numero-1" id="numeroSequencial">001</div>
-                        <div class="servico-container" id="servicoDisplay"></div>
+        <!-- ---- COLUNA LATERAL: ÚLTIMAS CHAMADAS ---- -->
+        <aside class="coluna-historico">
+
+            <p class="historico-titulo">Últimas Chamadas</p>
+
+            <!-- Chamada anterior -->
+            <div>
+                <p class="badge-posicao">Chamada anterior</p>
+                <div class="card card-historico">
+
+                    <div class="card-header">
+                        <img src="../assets/img/forum.png" alt="Logo Fórum" />
+                        <h2>PODER JUDICIÁRIO FÓRUM</h2>
                     </div>
-                </div>
-                <!-- Horário (apenas para audiência e serviço social) -->
-                <div class="horario-container-1" id="horarioSection">
-                    <strong>SESSÃO:</strong>
-                    <span class="sessao-span" id="horario"></span>
-                </div>
-            </div>
-        </div>
-        </div>
-            <div class="container-container-section">
-            <div class="main_gerador-2">
-            <!-- Cabeçalho com Logo -->
-            <div class="cabecalho-comprovante-2">
-                <div class="cabecalho-esquerda-2">
-                    <img class="cabecalho-logo-2" src="../assets/img/FÓRUM.png" alt="Logo Fórum">
-                    <h1 class="cabecalho-titulo-2">PODER JUDICIÁRIO FÓRUM</h1>
-                </div>
-            </div>
 
-            <!-- Data e Hora lado a lado -->
-            <div class="elementos-data-2">
-                <div class="data-hora-container-2">
-                    <p class="data-class-2"><strong>DATA</strong> <span id="data"></span></p>
-                    <p class="hora-class-2"><strong>HORA</strong> <span id="hora"></span></p>
-                </div>
-            </div>
-
-
-            <!-- Conteúdo Principal -->
-            <div class="conteudo-principal-2">
-
-                <!-- Senha e Serviço -->
-                <div class="elemento-servico-2">
-                    <div class="senha-servico-container-2">
-                        <div class="senha-numero-2" id="numeroSequencial">001</div>
-                        <div class="servico-container" id="servicoDisplay"></div>
+                    <div class="card-data-hora">
+                        <p><strong>Data</strong> <span id="data-hist-1">--/--/----</span></p>
+                        <p><strong>Hora</strong> <span id="hora-hist-1">--:--:--</span></p>
                     </div>
-                </div>
-                <!-- Horário (apenas para audiência e serviço social) -->
-                <div class="horario-container-2" id="horarioSection">
-                    <strong>SESSÃO:</strong>
-                    <span class="sessao-span" id="horario"></span>
-                </div>
-            </div>
-        </div>
-        </div>
-        </section>
 
-            <div class="linha"></div>
-        
-        <section>
-            <h1>CHAMADA-ATUAL</h1>
-            <div class="container-imp">
-            <div class="main_gerador">
-            <!-- Cabeçalho com Logo -->
-            <div class="cabecalho-comprovante">
-                <div class="cabecalho-esquerda">
-                    <img class="cabecalho-logo" src="../assets/img/FÓRUM.png" alt="Logo Fórum">
-                    <h1 class="cabecalho-titulo">PODER JUDICIÁRIO FÓRUM</h1>
-                </div>
-            </div>
-
-            <!-- Data e Hora lado a lado -->
-            <div class="elementos-data">
-                <div class="data-hora-container">
-                    <p class="data-class"><strong>DATA</strong> <span id="data"></span></p>
-                    <p class="hora-class"><strong>HORA</strong> <span id="hora"></span></p>
-                </div>
-            </div>
-
-
-            <!-- Conteúdo Principal -->
-            <div class="conteudo-principal">
-
-                <!-- Senha e Serviço -->
-                <div class="elemento-servico">
-                    <div class="senha-servico-container">
-                        <div class="senha-numero" id="numeroSequencial">001</div>
-                        <div class="servico-container" id="servicoDisplay"></div>
+                    <div class="senha-display">
+                        <div class="senha-numero-historico" id="senha-hist-1">—</div>
+                        <div class="senha-servico-historico" id="servico-hist-1">—</div>
                     </div>
-                </div>
-                <!-- Horário (apenas para audiência e serviço social) -->
-                <div class="horario-container" id="horarioSection">
-                    <strong>SESSÃO:</strong>
-                    <span class="sessao-span" id="horario"></span>
+
+                    <div class="sessao-bar">
+                        <strong>SESSÃO:</strong>
+                        <span id="horario-hist-1">—</span>
+                    </div>
+
                 </div>
             </div>
-        </div>
-        </div>
-        </section>
+
+            <!-- 2ª chamada anterior -->
+            <div>
+                <p class="badge-posicao">2ª chamada anterior</p>
+                <div class="card card-historico">
+
+                    <div class="card-header">
+                        <img src="../assets/img/forum.png" alt="Logo Fórum" />
+                        <h2>PODER JUDICIÁRIO FÓRUM</h2>
+                    </div>
+
+                    <div class="card-data-hora">
+                        <p><strong>Data</strong> <span id="data-hist-2">--/--/----</span></p>
+                        <p><strong>Hora</strong> <span id="hora-hist-2">--:--:--</span></p>
+                    </div>
+
+                    <div class="senha-display">
+                        <div class="senha-numero-historico" id="senha-hist-2">—</div>
+                        <div class="senha-servico-historico" id="servico-hist-2">—</div>
+                    </div>
+
+                    <div class="sessao-bar">
+                        <strong>SESSÃO:</strong>
+                        <span id="horario-hist-2">—</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </aside>
+
     </main>
-    <script type="module" src="/src/javascrip/chamador.js"></script>
-</body>
 
-</html>
+
+    <!-- ===================================================
+       FOOTER — ticker de notícias
+  =================================================== -->
+    <footer>
+        <span class="ticker-label">Notícias</span>
+        <img class="ticker-imagem" id="ticker-img" src="" alt="" />
+        <div class="ticker-wrapper">
+            <p class="ticker-texto" id="ticker-title">Carregando notícias...</p>
+        </div>
+    </footer>
+
+
+    <!-- ===================================================
+       SCRIPTS
+       Ordem importante:
+         1. chamador.js        — lógica do painel (relógio + histórico)
+         2. js_api_noticias.js — seu script externo de notícias
+         3. seu módulo de chamadas (se usar ES Module, adicione type="module")
+  =================================================== -->
+    <script src="../../src/javascrip/chamador.js"></script>
+    <script src="../../src/javascrip/admin/script-chamador.js"></script>
+    <!-- <script type="module" src="/src/javascrip/chamador.js"></script> -->
+
+</body>
